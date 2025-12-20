@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مجموعة امسا الدولية القابضة | الاستثمار والتمويل</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* Reset & Base Styles */
+        :root {
+            /* Corporate Colors */
+            --primary: #0C3B2E;    /* Dark Green - Stability */
+            --secondary: #D4AF37;  /* Gold - Prestige */
+            --accent: #1E6B52;     /* Green - Growth */
+            --light: #F8F9FA;      /* Light Background */
+            --dark: #212529;       /* Dark Text */
+            --gray: #6C757D;       /* Gray */
+            
+            /* Typography */
+            --font-primary: 'Almarai', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-primary);
+            line-height: 1.8;
+            color: var(--dark);
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        /* Container */
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.8rem; }
+        h3 { font-size: 2.2rem; }
+        h4 { font-size: 1.8rem; }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.8rem; }
+        }
+        
+        .lead {
+            font-size: 1.3rem;
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            gap: 10px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(12, 59, 46, 0.2);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-main {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+        }
+        
+        .logo-sub {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Navigation */
+        .nav {
+            display: flex;
+            gap: 40px;
+        }
+        
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .nav-link.active {
+            color: var(--primary);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 180px 0 100px;
+            background: linear-gradient(135deg, rgba(12, 59, 46, 0.9), rgba(30, 107, 82, 0.8)),
+                        url('https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1, .hero .lead {
+            color: white;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Sections Common */
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .about-text {
+            font-size: 1.1rem;
+        }
+        
+        .about-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        
+        .feature-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+        
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .service-content {
+            padding: 30px;
+        }
+        
+        .service-content h3 {
+            margin-bottom: 15px;
+        }
+        
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+        }
+        
+        .portfolio-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(12, 59, 46, 0.9), transparent);
+            color: white;
+            padding: 30px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            transform: translateY(0);
+        }
+        
+        .portfolio-item:hover .portfolio-img {
+            transform: scale(1.1);
+        }
+        
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .team-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .team-info {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .team-position {
+            color: var(--accent);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .contact-icon {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 80px 0 30px;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-title {
+            color: white;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .about-content,
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-stats,
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            
+            .section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <div class="logo-img">أ</div>
+                <div class="logo-text">
+                    <div class="logo-main">مجموعة امسا الدولية القابضة</div>
+                    <div class="logo-sub">EMSA International Holding Group</div>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="nav" id="mainNav">
+                <a href="#home" class="nav-link active">الرئيسية</a>
+                <a href="#about" class="nav-link">من نحن</a>
+                <a href="#services" class="nav-link">خدماتنا</a>
+                <a href="#portfolio" class="nav-link">شركاتنا</a>
+                <a href="#team" class="nav-link">فريق العمل</a>
+                <a href="#contact" class="nav-link">اتصل بنا</a>
+                <div class="dropdown">
+                    <a href="#" class="nav-link">عربي <i class="fas fa-chevron-down"></i></a>
+                    <div class="dropdown-content">
+                        <a href="#">English</a>
+                        <a href="#">العربية</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content" data-aos="fade-up">
+            <h1>الريادة في الاستثمار والتمويل</h1>
+            <p class="lead">مجموعة امسا الدولية القابضة - رؤية استثمارية متكاملة تعزز النمو الاقتصادي والتنمية المستدامة</p>
+            
+            <div class="hero-stats" data-aos="fade-up" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number">١٥+</div>
+                    <div class="stat-label">سنة خبرة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">٥٠+</div>
+                    <div class="stat-label">شركة تابعة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">١٠٠+</div>
+                    <div class="stat-label">مليار ريال</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">١٢</div>
+                    <div class="stat-label">قطاع استثماري</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">من نحن</h2>
+            <div class="about-content" data-aos="fade-up">
+                <div class="about-text">
+                    <p>مجموعة امسا الدولية القابضة هي كيان استثماري رائد في المملكة العربية السعودية، تأسست برؤية طموحة لتعزيز النمو الاقتصادي والتنمية المستدامة عبر محفظة استثمارية متنوعة.</p>
+                    
+                    <p>نحن نستثمر في القطاعات الحيوية التي تدعم رؤية المملكة 2030، من خلال استراتيجيات استثمارية مبتكرة وشراكات استراتيجية تعزز القيمة المضافة للمساهمين والمجتمع.</p>
+                    
+                    <div class="about-features">
+                        <div class="feature-item" data-aos="fade-right">
+                            <div class="feature-icon">
+                                <i class="fas fa-bullseye"></i>
+                            </div>
+                            <div>
+                                <h4>الرؤية</h4>
+                                <p>الريادة في الاستثمار المستدام</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" data-aos="fade-left">
+                            <div class="feature-icon">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <div>
+                                <h4>الرسالة</h4>
+                                <p>خلق قيمة مستدامة للمساهمين</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" data-aos="fade-right">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div>
+                                <h4>القيمة</h4>
+                                <p>النزاهة والابتكار والتميز</p>
+                            </div>
+                        </div>
+                        <div class="feature-item" data-aos="fade-left">
+                            <div class="feature-icon">
+                                <i class="fas fa-handshake"></i>
+                            </div>
+                            <div>
+                                <h4>الشراكة</h4>
+                                <p>شراكات استراتيجية طويلة الأمد</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <img src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
+                         alt="مجموعة امسا" 
+                         style="width: 100%; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">خدماتنا الاستثمارية</h2>
+            
+            <div class="services-grid">
+                <div class="service-card" data-aos="fade-up">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الاستثمار العقاري</h3>
+                        <p>إدارة وتطوير المشاريع العقارية الكبرى، والاستثمار في الأصول العقارية ذات القيمة المضافة.</p>
+                        <ul style="margin-top: 15px; padding-right: 20px;">
+                            <li>المجمعات السكنية</li>
+                            <li>المجمعات التجارية</li>
+                            <li>المشاريع السياحية</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الاستثمار الصناعي</h3>
+                        <p>الاستثمار في الصناعات التحويلية والصناعات التكميلية التي تدعم التنمية الصناعية.</p>
+                        <ul style="margin-top: 15px; padding-right: 20px;">
+                            <li>الصناعات البتروكيماوية</li>
+                            <li>الصناعات التحويلية</li>
+                            <li>الطاقة المتجددة</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>إدارة المحافظ</h3>
+                        <p>إدارة محافظ استثمارية متنوعة تحقق عوائد تنافسية مع إدارة متكاملة للمخاطر.</p>
+                        <ul style="margin-top: 15px; padding-right: 20px;">
+                            <li>محافظ الأسهم</li>
+                            <li>محافظ الدخل الثابت</li>
+                            <li>المحافظ المتوازنة</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>الاستشارات المالية</h3>
+                        <p>تقديم استشارات مالية متخصصة للشركات والأفراد لتحقيق أهدافهم المالية.</p>
+                        <ul style="margin-top: 15px; padding-right: 20px;">
+                            <li>الاندماج والاستحواذ</li>
+                            <li>التقييم المالي</li>
+                            <li>الدراسات الجدوى</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="section" id="portfolio">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">شركاتنا التابعة</h2>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="الاستثمار العقاري" 
+                         class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>امسا للاستثمار العقاري</h3>
+                        <p>تطوير المشاريع العقارية المتكاملة</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="الطاقة" 
+                         class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>امسا للطاقة</h3>
+                        <p>استثمارات في الطاقة المتجددة</p>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="التمويل" 
+                         class="portfolio-img">
+                    <div class="portfolio-overlay">
+                        <h3>امسا للتمويل</h3>
+                        <p>خدمات التمويل المتخصصة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="section" id="team" style="background-color: #f8f9fa;">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">فريق القيادة</h2>
+            
+            <div class="team-grid">
+                <div class="team-card" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="رئيس مجلس الإدارة" 
+                         class="team-img">
+                    <div class="team-info">
+                        <h3>سمو الأمير محمد بن سعود</h3>
+                        <div class="team-position">رئيس مجلس الإدارة</div>
+                        <p>خبرة تزيد عن 30 عاماً في القطاع المالي والاستثماري</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="الرئيس التنفيذي" 
+                         class="team-img">
+                    <div class="team-info">
+                        <h3>المهندس أحمد العتيبي</h3>
+                        <div class="team-position">الرئيس التنفيذي</div>
+                        <p>خبرة 25 عاماً في إدارة الشركات القابضة</p>
+                    </div>
+                </div>
+                
+                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="مدير الاستثمار" 
+                         class="team-img">
+                    <div class="team-info">
+                        <h3>الدكتورة سارة القحطاني</h3>
+                        <div class="team-position">مدير الاستثمار</div>
+                        <p>دكتوراه في التمويل من جامعة هارفارد</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">اتصل بنا</h2>
+            
+            <div class="contact-grid" data-aos="fade-up">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4>العنوان</h4>
+                            <p>الرياض - المملكة العربية السعودية<br>
+                               حي المالية، برج المملكة، الطابق 40</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>+966 11 123 4567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>info@emsa-holding.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>ساعات العمل</h4>
+                            <p>الأحد - الخميس: 8 صباحاً - 5 مساءً</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <form id="contactForm" style="background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; color: var(--primary); font-weight: 700;">الاسم الكامل</label>
+                            <input type="text" 
+                                   style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem;"
+                                   placeholder="أدخل اسمك الكامل">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; color: var(--primary); font-weight: 700;">البريد الإلكتروني</label>
+                            <input type="email" 
+                                   style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem;"
+                                   placeholder="example@email.com">
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 8px; color: var(--primary); font-weight: 700;">الرسالة</label>
+                            <textarea rows="5" 
+                                      style="width: 100%; padding: 12px 15px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 1rem;"
+                                      placeholder="أدخل رسالتك هنا..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <i class="fas fa-paper-plane"></i>
+                            إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo" style="color: white; margin-bottom: 20px;">
+                        <div class="logo-img">أ</div>
+                        <div class="logo-text">
+                            <div class="logo-main">مجموعة امسا</div>
+                            <div class="logo-sub">القابضة</div>
+                        </div>
+                    </div>
+                    <p>نحن شركة استثمارية قابضة رائدة، ملتزمون بخلق قيمة مستدامة للمساهمين والمجتمع.</p>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">الرئيسية</a></li>
+                        <li><a href="#about">من نحن</a></li>
+                        <li><a href="#services">خدماتنا</a></li>
+                        <li><a href="#portfolio">شركاتنا</a></li>
+                        <li><a href="#team">فريق العمل</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">الخدمات</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">الاستثمار العقاري</a></li>
+                        <li><a href="#">الاستثمار الصناعي</a></li>
+                        <li><a href="#">إدارة المحافظ</a></li>
+                        <li><a href="#">الاستشارات المالية</a></li>
+                        <li><a href="#">التمويل المتخصص</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="footer-title">تابعونا</h4>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    
+                    <div style="margin-top: 30px;">
+                        <h4 class="footer-title">النشرة البريدية</h4>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="email" 
+                                   placeholder="بريدك الإلكتروني"
+                                   style="flex: 1; padding: 10px 15px; border-radius: 8px; border: none;">
+                            <button class="btn btn-primary" style="padding: 10px 20px;">اشتراك</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2024 مجموعة امسا الدولية القابضة. جميع الحقوق محفوظة.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    <a href="#" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; margin: 0 10px;">سياسة الخصوصية</a> | 
+                    <a href="#" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; margin: 0 10px;">الشروط والأحكام</a> | 
+                    <a href="#" style="color: rgba(255, 255, 255, 0.6); text-decoration: none; margin: 0 10px;">إخلاء المسؤولية</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            mobileMenuBtn.innerHTML = mainNav.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+        
+        // Contact Form
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('شكراً لتواصلك مع مجموعة امسا الدولية القابضة. سنعود إليك قريباً.');
+            this.reset();
+        });
+        
+        // Active Nav Link on Scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const scrollPosition = window.scrollY + 100;
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                const sectionId = section.getAttribute('id');
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${sectionId}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
