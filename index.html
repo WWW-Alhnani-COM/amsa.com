@@ -140,17 +140,22 @@
             gap: 15px;
         }
         
+        /* تحديث استايل الشعار ليكون صورة */
         .logo-img {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
+            width: 70px;
+            height: 70px;
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.8rem;
-            font-weight: 800;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
         
         .logo-text {
@@ -510,6 +515,21 @@
             color: rgba(255, 255, 255, 0.6);
         }
         
+        /* Footer Logo */
+        .footer-logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        .footer-logo-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
         /* Responsive */
         @media (max-width: 1200px) {
             .hero-stats {
@@ -564,6 +584,30 @@
             .section {
                 padding: 60px 0;
             }
+            
+            .logo-img {
+                width: 60px;
+                height: 60px;
+            }
+            
+            .logo-main {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .logo-main {
+                font-size: 1.3rem;
+            }
+            
+            .logo-sub {
+                font-size: 0.8rem;
+            }
         }
     </style>
 </head>
@@ -572,7 +616,13 @@
     <header class="header">
         <div class="container header-container">
             <div class="logo">
-                <div class="logo-img">أ</div>
+                <!-- هنا يتم وضع شعار الصورة -->
+                <div class="logo-img">
+                    <!-- استبدل هذا الرابط برابط شعار شركتك -->
+                    <img src="amsa-logo@4x.png" 
+                         alt="شعار مجموعة امسا الدولية القابضة"
+                         onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%230C3B2E\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"40\" fill=\"white\" text-anchor=\"middle\" dy=\".3em\">أ</text></svg>';">
+                </div>
                 <div class="logo-text">
                     <div class="logo-main">مجموعة امسا الدولية القابضة</div>
                     <div class="logo-sub">EMSA International Holding Group</div>
@@ -590,12 +640,8 @@
                 <a href="#portfolio" class="nav-link">شركاتنا</a>
                 <a href="#team" class="nav-link">فريق العمل</a>
                 <a href="#contact" class="nav-link">اتصل بنا</a>
-                <div class="dropdown">
+                <div class="language-switcher">
                     <a href="#" class="nav-link">عربي <i class="fas fa-chevron-down"></i></a>
-                    <div class="dropdown-content">
-                        <a href="#">English</a>
-                        <a href="#">العربية</a>
-                    </div>
                 </div>
             </nav>
         </div>
@@ -924,13 +970,13 @@
         <div class="container">
             <div class="footer-grid">
                 <div>
-                    <div class="logo" style="color: white; margin-bottom: 20px;">
-                        <div class="logo-img">أ</div>
-                        <div class="logo-text">
-                            <div class="logo-main">مجموعة امسا</div>
-                            <div class="logo-sub">القابضة</div>
-                        </div>
+                    <div class="footer-logo-img">
+                        <!-- نفس شعار الصورة في الفوتر -->
+                        <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" 
+                             alt="شعار مجموعة امسا الدولية القابضة"
+                             onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100\" height=\"100\" viewBox=\"0 0 100 100\"><rect width=\"100\" height=\"100\" fill=\"%23D4AF37\"/><text x=\"50\" y=\"50\" font-family=\"Arial\" font-size=\"40\" fill=\"white\" text-anchor=\"middle\" dy=\".3em\">أ</text></svg>';">
                     </div>
+                    <h4 class="footer-title">مجموعة امسا الدولية القابضة</h4>
                     <p>نحن شركة استثمارية قابضة رائدة، ملتزمون بخلق قيمة مستدامة للمساهمين والمجتمع.</p>
                 </div>
                 
@@ -971,7 +1017,7 @@
                             <input type="email" 
                                    placeholder="بريدك الإلكتروني"
                                    style="flex: 1; padding: 10px 15px; border-radius: 8px; border: none;">
-                            <button class="btn btn-primary" style="padding: 10px 20px;">اشتراك</button>
+                            <button class="btn btn-primary" style="padding: 10px 20px; background: var(--secondary); border: none;">اشتراك</button>
                         </div>
                     </div>
                 </div>
@@ -1057,6 +1103,14 @@
                         }
                     });
                 }
+            });
+        });
+        
+        // Handle logo image loading error
+        const logoImages = document.querySelectorAll('.logo-img img, .footer-logo-img img');
+        logoImages.forEach(img => {
+            img.addEventListener('error', function() {
+                this.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230C3B2E"/><text x="50" y="50" font-family="Arial" font-size="40" fill="white" text-anchor="middle" dy=".3em">أ</text></svg>';
             });
         });
     </script>
