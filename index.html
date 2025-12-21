@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -1378,6 +1377,104 @@
 .counter-trend.down {
     color: #e74c3c;
 }
+
+        /* أنيميشن للواتساب */
+@keyframes whatsappPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: #25d366;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: whatsappPulse 2s infinite;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+    animation: none;
+}
+
+.whatsapp-text {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    z-index: 1000;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    border-right: 4px solid #25d366;
+}
+
+.whatsapp-float:hover + .whatsapp-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.whatsapp-notification {
+    position: fixed;
+    top: 100px;
+    left: 20px;
+    background: linear-gradient(135deg, #25d366, #128C7E);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    animation: slideInUp 0.5s ease;
+    max-width: 300px;
+    display: none;
+}
+
+.whatsapp-notification.show {
+    display: block;
+}
+
+.whatsapp-notification .close {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -1515,24 +1612,6 @@
                 <div class="service-content">
                     <h3>إدارة المحافظ الاستثمارية</h3>
                     <p>إدارة محافظ استثمارية متنوعة تحقق عوائد تنافسية مع إدارة متكاملة للمخاطر باستخدام أحدث الأدوات التحليلية</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">العائد المتوقع:</span>
-                            <span class="detail-value profit-highlight">10-25% سنوياً</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">الحد الأدنى:</span>
-                            <span class="detail-value">100,000 ﷼</span>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(1)">
-                            <i class="fas fa-info-circle"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
             
@@ -1544,24 +1623,6 @@
                 <div class="service-content">
                     <h3>استثمارات مالية للشركات</h3>
                     <p>حلول استثمارية متخصصة للشركات والمؤسسات لتحسين أدائها المالي وزيادة قيمتها السوقية</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">القيمة المضافة:</span>
-                            <span class="detail-value profit-highlight">20-50% زيادة</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">المدة:</span>
-                            <span class="detail-value">3-6 أشهر</span>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(2)">
-                            <i class="fas fa-info-circle"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
             
@@ -1573,24 +1634,6 @@
                 <div class="service-content">
                     <h3>التداول في الأسواق المالية</h3>
                     <p>خدمات تداول متقدمة في الأسواق المحلية والعالمية باستخدام منصات متطورة وتحليل فني متقدم</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">السيولة:</span>
-                            <span class="detail-value profit-highlight">عالية</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">الدعم:</span>
-                            <span class="detail-value">24/7</span>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(3)">
-                            <i class="fas fa-info-circle"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
             
@@ -1603,24 +1646,6 @@
                 <div class="service-content">
                     <h3>الاستثمار في التكنولوجيا</h3>
                     <p>الاستثمار في قطاع التكنولوجيا المالية والشركات التقنية الناشئة ذات النمو المتسارع</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">نسبة النمو:</span>
-                            <span class="detail-value profit-highlight">30-100% سنوياً</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">القطاعات:</span>
-                            <span class="detail-value">5+</span>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, var(--secondary), var(--gold-light));" onclick="showServiceDetails(4)">
-                            <i class="fas fa-crown"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
             
@@ -1632,24 +1657,6 @@
                 <div class="service-content">
                     <h3>خدمات الثروات الخاصة</h3>
                     <p>حلول مالية حصرية وشخصية للأفراد ذوي الثروات العالية (HNWI) مع هوامش ربحية متميزة</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">الحد الأدنى:</span>
-                            <span class="detail-value">5 مليون ﷼</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">هامش الربح:</span>
-                            <span class="detail-value profit-highlight">15-40%</span>
-                        </div>
-                    </div>
-                     -->
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(5)">
-                            <i class="fas fa-info-circle"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
             
@@ -1662,24 +1669,6 @@
                 <div class="service-content">
                     <h3>الاستثمار في المشاريع الكبرى</h3>
                     <p>مشاركة في المشاريع الوطنية الكبرى والمبادرات التنموية العملاقة في المملكة العربية السعودية</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">المدة:</span>
-                            <span class="detail-value">5-10 سنوات</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">العائد السنوي:</span>
-                            <span class="detail-value profit-highlight">20-35%</span>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(6)">
-                            <i class="fas fa-info-circle"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
             
@@ -1691,24 +1680,6 @@
                 <div class="service-content">
                     <h3>استثمارات القطاعات الواعدة</h3>
                     <p>التركيز على القطاعات الاستراتيجية التي تدعم رؤية المملكة 2030 وتتمتع بإمكانيات نمو هائلة</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">الحوافز:</span>
-                            <span class="detail-value">إعفاءات ضريبية</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">الدعم:</span>
-                            <span class="detail-value profit-highlight">حكومي</span>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(7)">
-                            <i class="fas fa-info-circle"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
             
@@ -1720,24 +1691,6 @@
                 <div class="service-content">
                     <h3>الاستثمار في الأسهم الدولية</h3>
                     <p>تنويع المحفظة الاستثمارية عبر الاستثمار في الأسواق العالمية والشركات العالمية الرائدة</p>
-                    
-                    <!-- <div class="service-details">
-                        <div class="detail-item">
-                            <span class="detail-label">المزايا:</span>
-                            <span class="detail-value">تنويع جغرافي</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">الاستقرار:</span>
-                            <span class="detail-value profit-highlight">عالي</span>
-                        </div>
-                    </div> -->
-                    
-                    <!-- <div class="service-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(8)">
-                            <i class="fas fa-info-circle"></i>
-                            عرض التفاصيل
-                        </button>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -1792,14 +1745,6 @@
         <span><i class="fas fa-chart-line"></i> النمو اليومي: <span id="growthRate">0</span>%</span>
     </div>
 </div>
-        
-        <!-- زر الاطلاع على جميع الخدمات -->
-        <!-- <div style="text-align: center; margin-top: 60px;" data-aos="fade-up">
-            <button class="btn btn-primary" onclick="showServicesModal()" style="padding: 15px 40px; font-size: 1.1rem;">
-                <i class="fas fa-info-circle"></i>
-                الاطلاع على تفاصيل جميع الخدمات
-            </button>
-        </div> -->
     </div>
 </section>
 <!-- Modal تفاصيل الخدمات -->
@@ -1822,11 +1767,6 @@
                 <p style="color: var(--gray); margin-bottom: 15px;">
                     نقدم إدارة احترافية للمحافظ الاستثمارية مع مراعاة ملف المخاطر الخاص بكل عميل، باستخدام أحدث أدوات التحليل الفني والأساسي.
                 </p>
-                <!-- <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 10px;">
-                    <strong style="color: var(--primary);">الحد الأدنى للاستثمار:</strong> 100,000 ريال<br>
-                    <strong style="color: var(--primary);">رسوم الإدارة:</strong> 1-2% سنوياً من قيمة المحفظة<br>
-                    <strong style="color: var(--primary);">التقارير:</strong> شهري، ربع سنوي، سنوي
-                </div> -->
             </div>
             
             <!-- تفاصيل خدمات الثروات الخاصة -->
@@ -1838,11 +1778,6 @@
                 <p style="color: var(--gray); margin-bottom: 15px;">
                     خدمات حصرية ومخصصة للأفراد ذوي الثروات العالية مع مدير حساب شخصي وفرص استثمارية خاصة غير متاحة للجمهور.
                 </p>
-                <!-- <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 10px;">
-                    <strong style="color: var(--primary);">الحد الأدنى:</strong> 5 مليون ريال<br>
-                    <strong style="color: var(--primary);">الرسوم:</strong> متغيرة حسب حجم الاستثمار والخدمات<br>
-                    <strong style="color: var(--primary);">المزايا:</strong> فرص استثمار حصرية، مدير شخصي، اجتماعات ربع سنوية
-                </div> -->
             </div>
             
             <!-- تفاصيل الاستثمار في المشاريع الكبرى -->
@@ -1854,24 +1789,8 @@
                 <p style="color: var(--gray); margin-bottom: 15px;">
                     فرصة المشاركة في المشاريع الوطنية العملاقة التي تقودها المملكة ضمن رؤية 2030، مع ضمانات حكومية وعوائد مستقرة.
                 </p>
-                <!-- <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-top: 10px;">
-                    <strong style="color: var(--primary);">المشاريع:</strong> نيوم، البحر الأحمر، القدية، أمالا<br>
-                    <strong style="color: var(--primary);">مدة الاستثمار:</strong> 5-10 سنوات<br>
-                    <strong style="color: var(--primary);">العوائد المتوقعة:</strong> 20-35% سنوياً
-                </div> -->
             </div>
         </div>
-        
-        <!-- <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
-            <button class="btn btn-primary" onclick="requestServiceConsultation()" style="margin-bottom: 10px;">
-                <i class="fas fa-calendar-check"></i>
-                طلب استشارة مجانية
-            </button>
-            <button class="btn btn-secondary" onclick="closeServicesModal()" style="margin-right: 15px;">
-                <i class="fas fa-times"></i>
-                إغلاق
-            </button>
-        </div> -->
     </div>
 </div>
 
@@ -1879,7 +1798,6 @@
     <section class="offers-section" id="offers">
         <div class="container">
            
-            
             <!-- رأس قسم العروض -->
             <div class="offer-header" data-aos="fade-up">
                 <div class="offer-badge">
@@ -1888,8 +1806,6 @@
                 <h2 class="section-title">عروض الاستثمار الحصرية</h2>
                 <p class="lead">فرص استثمارية استثنائية بنسبة ربح 35%</p>
             </div>
-            
-           
             
             <!-- شبكة العروض -->
             <div class="offers-grid">
@@ -1919,8 +1835,8 @@
                         </div>
                     </div>
                     <div class="offer-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showInvestmentModal(1000)">
-                            <i class="fas fa-check-circle"></i>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openWhatsAppInvestment(1000)">
+                            <i class="fab fa-whatsapp"></i>
                             اختر هذا العرض
                         </button>
                     </div>
@@ -1952,8 +1868,8 @@
                         </div>
                     </div>
                     <div class="offer-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showInvestmentModal(1500)">
-                            <i class="fas fa-check-circle"></i>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openWhatsAppInvestment(1500)">
+                            <i class="fab fa-whatsapp"></i>
                             اختر هذا العرض
                         </button>
                     </div>
@@ -1985,8 +1901,8 @@
                         </div>
                     </div>
                     <div class="offer-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showInvestmentModal(3000)">
-                            <i class="fas fa-check-circle"></i>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openWhatsAppInvestment(3000)">
+                            <i class="fab fa-whatsapp"></i>
                             اختر هذا العرض
                         </button>
                     </div>
@@ -2018,8 +1934,8 @@
                         </div>
                     </div>
                     <div class="offer-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showInvestmentModal(5000)">
-                            <i class="fas fa-check-circle"></i>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openWhatsAppInvestment(5000)">
+                            <i class="fab fa-whatsapp"></i>
                             اختر هذا العرض
                         </button>
                     </div>
@@ -2052,8 +1968,8 @@
                         </div>
                     </div>
                     <div class="offer-cta">
-                        <button class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, var(--secondary), var(--gold-light));" onclick="showInvestmentModal(10000)">
-                            <i class="fas fa-crown"></i>
+                        <button class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, var(--secondary), var(--gold-light));" onclick="openWhatsAppInvestment(10000)">
+                            <i class="fab fa-whatsapp"></i>
                             اختر العرض المميز
                         </button>
                     </div>
@@ -2085,8 +2001,8 @@
                         </div>
                     </div>
                     <div class="offer-cta">
-                        <button class="btn btn-primary" style="width: 100%;" onclick="showInvestmentModal(20000)">
-                            <i class="fas fa-check-circle"></i>
+                        <button class="btn btn-primary" style="width: 100%;" onclick="openWhatsAppInvestment(20000)">
+                            <i class="fab fa-whatsapp"></i>
                             اختر هذا العرض
                         </button>
                     </div>
@@ -2143,12 +2059,6 @@
             <div class="bank-name">بنك الرياض</div>
         </div>
         
-        <!-- بنك ساب -->
-
-        
-        <!-- البنك العربي -->
-       
-        
         <!-- بنك البلاد -->
         <div class="bank-card">
             <div class="bank-icon">
@@ -2168,14 +2078,7 @@
             </div>
             <div class="bank-name">بنك الجزيرة</div>
         </div>
-        
-        
     </div>
-    
-    <!-- شريط التمرير الإرشادي -->
-    <!-- <div style="text-align: center; margin-top: 20px; color: var(--gray); font-size: 0.9rem;">
-        <i class="fas fa-arrows-alt-h"></i> اسحب لرؤية المزيد من البنوك
-    </div> -->
 </div>  
             <!-- قسم الضمانات -->
             <div class="guarantees-section" data-aos="fade-up">
@@ -2230,8 +2133,8 @@
                             <p>نحن نضمن استثمارك بأعلى معايير الأمان والشفافية</p>
                         </div>
                         
-                        <button class="btn btn-primary" style="background: var(--secondary); color: var(--primary); border: none; font-weight: 800; padding: 15px 40px;" onclick="showInvestmentForm()">
-                            <i class="fas fa-rocket"></i>
+                        <button class="btn btn-primary" style="background: var(--secondary); color: var(--primary); border: none; font-weight: 800; padding: 15px 40px;" onclick="openWhatsApp()">
+                            <i class="fab fa-whatsapp"></i>
                             ابدأ الاستثمار الآن
                         </button>
                     </div>
@@ -2278,48 +2181,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Team Section -->
-    <!-- <section class="section" id="team" style="background-color: #f8f9fa;">
-        <div class="container">
-            <h2 class="section-title" data-aos="fade-up">فريق القيادة</h2>
-            
-            <div class="team-grid">
-                <div class="team-card" data-aos="fade-up">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="رئيس مجلس الإدارة" 
-                         class="team-img">
-                    <div class="team-info">
-                        <h3>سمو الأمير محمد بن سعود</h3>
-                        <div class="team-position">رئيس مجلس الإدارة</div>
-                        <p>خبرة تزيد عن 30 عاماً في القطاع المالي والاستثماري</p>
-                    </div>
-                </div>
-                
-                <div class="team-card" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="الرئيس التنفيذي" 
-                         class="team-img">
-                    <div class="team-info">
-                        <h3>المهندس أحمد العتيبي</h3>
-                        <div class="team-position">الرئيس التنفيذي</div>
-                        <p>خبرة 25 عاماً في إدارة الشركات القابضة</p>
-                    </div>
-                </div>
-                
-                <div class="team-card" data-aos="fade-up" data-aos-delay="200">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                         alt="مدير الاستثمار" 
-                         class="team-img">
-                    <div class="team-info">
-                        <h3>الدكتورة سارة القحطاني</h3>
-                        <div class="team-position">مدير الاستثمار</div>
-                        <p>دكتوراه في التمويل من جامعة هارفارد</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> -->
 
     <!-- Contact Section -->
     <section class="section" id="contact">
@@ -2484,9 +2345,9 @@
             </div>
             
             <div style="margin-top: 30px; display: flex; gap: 15px; justify-content: center;">
-                <button class="btn btn-primary" onclick="proceedToPayment()">
-                    <i class="fas fa-credit-card"></i>
-                    المتابعة للدفع
+                <button class="btn btn-primary" onclick="openWhatsAppFromModal()">
+                    <i class="fab fa-whatsapp"></i>
+                    التواصل عبر واتساب
                 </button>
                 <button class="btn btn-secondary" onclick="closeInvestmentModal()">
                     <i class="fas fa-times"></i>
@@ -2494,6 +2355,19 @@
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- زر الواتساب العائم -->
+    <div class="whatsapp-float" onclick="openWhatsApp()">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+    <div class="whatsapp-text">تواصل معنا عبر واتساب</div>
+
+    <!-- إشعار الواتساب -->
+    <div class="whatsapp-notification" id="whatsappNotification">
+        <button class="close" onclick="closeNotification()">×</button>
+        <strong>🎉 تم تحويلك إلى واتساب!</strong>
+        <p>سترسل رسالة تلقائية إلى فريقنا للاستثمار</p>
     </div>
 
     <!-- Scripts -->
@@ -2560,108 +2434,9 @@
             img.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%230C3B2E"/><text x="50" y="50" font-family="Arial" font-size="40" fill="white" text-anchor="middle" dy=".3em">أ</text></svg>';
         }
         
-        // دالة لعرض تفاصيل العرض
-        function showInvestmentModal(amount) {
-            const modal = document.getElementById('investmentModal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalContent = document.getElementById('modalContent');
-            
-            // حساب الأرباح
-            const dailyProfit = (amount * 0.35).toLocaleString();
-            const monthlyProfit = (amount * 0.35 * 30).toLocaleString();
-            const totalProfit = (amount * 0.35 * 60).toLocaleString();
-            const finalAmount = (amount + (amount * 0.35 * 60)).toLocaleString();
-            
-            modalTitle.textContent = `تفاصيل استثمار ${amount.toLocaleString()} ﷼`;
-            
-            modalContent.innerHTML = `
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">
-                        ${amount.toLocaleString()} ﷼
-                    </div>
-                    <div style="color: var(--gray);">مبلغ الاستثمار</div>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <span>الربح اليومي:</span>
-                        <span style="font-weight: 700; color: var(--profit-green);">${dailyProfit} ﷼</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <span>الربح الشهري:</span>
-                        <span style="font-weight: 700; color: var(--profit-green);">${monthlyProfit} ﷼</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                        <span>الربح الكلي لمدة شهرين:</span>
-                        <span style="font-weight: 700; color: var(--profit-green);">${totalProfit} ﷼</span>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; padding-top: 15px; border-top: 2px solid var(--primary);">
-                        <span style="font-weight: 800;">المبلغ النهائي:</span>
-                        <span style="font-weight: 800; color: var(--primary); font-size: 1.2rem;">${finalAmount} ﷼</span>
-                    </div>
-                </div>
-                
-                <div style="background: #fff3cd; padding: 15px; border-radius: 10px; border-right: 4px solid #ffc107; margin-bottom: 20px;">
-                    <div style="display: flex; align-items: center; gap: 10px; color: #856404;">
-                        <i class="fas fa-info-circle"></i>
-                        <span>مدة الاستثمار: 60 يوم (شهران)</span>
-                    </div>
-                </div>
-                
-                <div style="font-size: 0.9rem; color: var(--gray); text-align: center;">
-                    <i class="fas fa-clock"></i>
-                    يبدأ صرف الأرباح من اليوم التالي لإتمام عملية الدفع
-                </div>
-            `;
-            
-            modal.style.display = 'flex';
-        }
-        
         // دالة لإغلاق المودال
         function closeInvestmentModal() {
             document.getElementById('investmentModal').style.display = 'none';
-        }
-        
-        // دالة للمتابعة للدفع
-        function proceedToPayment() {
-            alert('سيتم توجيهك لصفحة الدفع الآمن\n\nسيتم إرسال تفاصيل الحسابات البنكية مع رقم المرجع الخاص بمعاملتك');
-            closeInvestmentModal();
-        }
-        
-        // دالة لعرض نموذج الاستثمار
-        function showInvestmentForm() {
-            const formHTML = `
-                <div style="text-align: center; padding: 30px;">
-                    <h3 style="color: var(--primary); margin-bottom: 20px;">📝 نموذج طلب الاستثمار</h3>
-                    
-                    <div style="background: #f8f9fa; padding: 25px; border-radius: 15px; margin-bottom: 20px;">
-                        <p style="margin-bottom: 15px;">للتسجيل في أحد عروضنا الاستثمارية:</p>
-                        
-                        <ol style="text-align: right; padding-right: 20px; margin-bottom: 20px;">
-                            <li style="margin-bottom: 10px;">اختر مبلغ الاستثمار المناسب</li>
-                            <li style="margin-bottom: 10px;">قم بالتحويل إلى أحد البنوك المذكورة</li>
-                            <li style="margin-bottom: 10px;">أرسل صورة التحويل عبر الواتساب</li>
-                            <li>ستتلقى العقد الرسمي خلال 24 ساعة</li>
-                        </ol>
-                        
-                        <div style="background: var(--primary); color: white; padding: 15px; border-radius: 10px;">
-                            <div style="display: flex; align-items: center; justify-content: center; gap: 10px;">
-                                <i class="fas fa-whatsapp"></i>
-                                <span>واتساب الاستثمار: +966 5X XXX XXXX</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-primary" onclick="closeInvestmentModal()" style="margin-top: 20px;">
-                        <i class="fas fa-check"></i>
-                        فهمت، شكراً لك
-                    </button>
-                </div>
-            `;
-            
-            document.getElementById('modalTitle').textContent = 'نموذج طلب الاستثمار';
-            document.getElementById('modalContent').innerHTML = formHTML;
-            document.getElementById('investmentModal').style.display = 'flex';
         }
         
         // إغلاق المودال عند الضغط خارج المحتوى
@@ -2691,378 +2466,464 @@
                 }
             });
         });
-    </script>
-</body>
-    <script>
-// دالة لعرض تفاصيل الخدمات
-function showServicesModal() {
-    document.getElementById('servicesModal').style.display = 'flex';
-}
 
-// دالة لإغلاق نافذة الخدمات
-function closeServicesModal() {
-    document.getElementById('servicesModal').style.display = 'none';
-}
-
-// دالة لطلب استشارة
-function requestServiceConsultation() {
-    const services = [
-        'إدارة المحافظ الاستثمارية',
-        'استثمارات مالية للشركات',
-        'التداول في الأسواق المالية',
-        'الاستثمار في التكنولوجيا',
-        'خدمات الثروات الخاصة',
-        'الاستثمار في المشاريع الكبرى',
-        'استثمارات القطاعات الواعدة',
-        'الاستثمار في الأسهم الدولية'
-    ];
-    
-    const serviceList = services.map(service => `• ${service}`).join('\n');
-    
-    alert(`شكراً لاهتمامك بخدماتنا الاستثمارية!\n\nالخدمات المتاحة:\n${serviceList}\n\nسيقوم أحد مستشارينا بالاتصال بك خلال 24 ساعة لتحديد موعد الاستشارة المجانية.\n\nرقم التواصل: 920000000`);
-    closeServicesModal();
-}
-
-// إغلاق المودال عند الضغط خارج المحتوى
-document.getElementById('servicesModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeServicesModal();
-    }
-});
-
-        // دالة لعرض تفاصيل الخدمة
-function showServiceDetails(serviceId) {
-    const services = {
-        1: {
-            title: "إدارة المحافظ الاستثمارية",
-            details: "محافظ استثمارية متنوعة تحقق عوائد تنافسية مع إدارة متكاملة للمخاطر باستخدام أحدث الأدوات التحليلية. تشمل محافظ النمو المتوازن، محافظ الدخل الثابت، المحافظ الدفاعية، ومحافظ النمو العدواني.",
-            features: ["مراقبة مستمرة", "تعديل استراتيجي شهري", "تقارير أسبوعية", "متابعة السوق 24/7"]
-        },
-        2: {
-            title: "استثمارات مالية للشركات",
-            details: "حلول استثمارية متخصصة للشركات والمؤسسات لتحسين أدائها المالي وزيادة قيمتها السوقية. تشمل عمليات الاندماج والاستحواذ، التقييم المالي، إعادة الهيكلة، والدراسات الجدوى.",
-            features: ["زيادة القيمة السوقية 20-50%", "دراسات جدوى شاملة", "تمويل المشاريع التوسعية"]
-        },
-        3: {
-            title: "التداول في الأسواق المالية",
-            details: "خدمات تداول متقدمة في الأسواق المحلية والعالمية باستخدام منصات متطورة وتحليل فني متقدم. تشمل تداول الأسهم، العملات، السلع، والعقود الآجلة.",
-            features: ["سيولة عالية", "تحليل فني متقدم", "منصات تداول متطورة", "فرص ربح سريعة"]
-        },
-        4: {
-            title: "الاستثمار في التكنولوجيا",
-            details: "الاستثمار في قطاع التكنولوجيا المالية والشركات التقنية الناشئة ذات النمو المتسارع. تشمل التكنولوجيا المالية، الذكاء الاصطناعي، بلوك تشين، والعملات الرقمية.",
-            features: ["نمو 30-100% سنوياً", "قطاعات تقنية واعدة", "استثمارات في شركات ناشئة"]
-        },
-        5: {
-            title: "خدمات الثروات الخاصة",
-            details: "حلول مالية حصرية وشخصية للأفراد ذوي الثروات العالية مع هوامش ربحية متميزة. تشمل التخطيط المالي الشامل، إدارة الثروات متعددة الأجيال، والاستثمارات الحصرية.",
-            features: ["مدير حساب شخصي", "فرص استثمار حصرية", "تخطيط ضريبي متقدم", "حماية مالية شاملة"]
-        },
-        6: {
-            title: "الاستثمار في المشاريع الكبرى",
-            details: "مشاركة في المشاريع الوطنية الكبرى والمبادرات التنموية العملاقة في المملكة العربية السعودية ضمن رؤية 2030.",
-            features: ["مشروع نيوم", "مشروع البحر الأحمر", "مشروع القدية", "مشروع أمالا", "مدينة الرياض الكبرى"]
-        },
-        7: {
-            title: "استثمارات القطاعات الواعدة",
-            details: "التركيز على القطاعات الاستراتيجية التي تدعم رؤية المملكة 2030 وتتمتع بإمكانيات نمو هائلة.",
-            features: ["الطاقة المتجددة", "السياحة والترفيه", "الرعاية الصحية", "الخدمات اللوجستية", "التعدين والصناعات"]
-        },
-        8: {
-            title: "الاستثمار في الأسهم الدولية",
-            details: "تنويع المحفظة الاستثمارية عبر الاستثمار في الأسواق العالمية والشركات العالمية الرائدة.",
-            features: ["بورصة نيويورك", "بورصة ناسداك", "بورصة لندن", "بورصة هونغ كونغ", "أسواق أوروبية وآسيوية"]
+        // دالة لعرض تفاصيل الخدمات
+        function showServicesModal() {
+            document.getElementById('servicesModal').style.display = 'flex';
         }
-    };
 
-    const service = services[serviceId];
-    
-    document.getElementById('modalTitle').textContent = `تفاصيل خدمة ${service.title}`;
-    
-    document.getElementById('modalContent').innerHTML = `
-        <div style="margin-bottom: 30px;">
-            <h4 style="color: var(--accent); margin-bottom: 15px;">${service.title}</h4>
-            <p style="color: var(--gray); line-height: 1.8; margin-bottom: 20px;">${service.details}</p>
+        // دالة لإغلاق نافذة الخدمات
+        function closeServicesModal() {
+            document.getElementById('servicesModal').style.display = 'none';
+        }
+
+        // دالة لطلب استشارة
+        function requestServiceConsultation() {
+            const services = [
+                'إدارة المحافظ الاستثمارية',
+                'استثمارات مالية للشركات',
+                'التداول في الأسواق المالية',
+                'الاستثمار في التكنولوجيا',
+                'خدمات الثروات الخاصة',
+                'الاستثمار في المشاريع الكبرى',
+                'استثمارات القطاعات الواعدة',
+                'الاستثمار في الأسهم الدولية'
+            ];
             
-            <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
-                <h5 style="color: var(--primary); margin-bottom: 15px;">المميزات الرئيسية:</h5>
-                <ul style="padding-right: 20px; margin-bottom: 0;">
-                    ${service.features.map(feature => `<li style="margin-bottom: 10px; padding-right: 10px; color: var(--dark);">${feature}</li>`).join('')}
-                </ul>
-            </div>
+            const serviceList = services.map(service => `• ${service}`).join('\n');
             
-            <div style="background: linear-gradient(135deg, rgba(12, 59, 46, 0.05), rgba(212, 175, 55, 0.05)); padding: 20px; border-radius: 12px; border-right: 4px solid var(--secondary);">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <i class="fas fa-clock" style="color: var(--secondary);"></i>
-                    <span style="font-weight: 700; color: var(--primary);">المدة:</span>
-                    <span>تختلف حسب نوع الخدمة</span>
-                </div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-chart-line" style="color: var(--secondary);"></i>
-                    <span style="font-weight: 700; color: var(--primary);">العائد المتوقع:</span>
-                    <span>يختلف حسب مستوى المخاطرة</span>
-                </div>
-            </div>
-        </div>
-        
-        <div style="text-align: center;">
-            <button class="btn btn-primary" onclick="requestServiceConsultation(${serviceId})" style="margin-bottom: 10px;">
-                <i class="fas fa-calendar-check"></i>
-                طلب استشارة مجانية
-            </button>
-            <p style="color: var(--gray); font-size: 0.9rem; margin-top: 10px;">
-                سيتصل بك مستشارنا خلال 24 ساعة
-            </p>
-        </div>
-    `;
-    
-    document.getElementById('investmentModal').style.display = 'flex';
-}
+            alert(`شكراً لاهتمامك بخدماتنا الاستثمارية!\n\nالخدمات المتاحة:\n${serviceList}\n\nسيقوم أحد مستشارينا بالاتصال بك خلال 24 ساعة لتحديد موعد الاستشارة المجانية.\n\nرقم التواصل: 920000000`);
+            closeServicesModal();
+        }
 
-        // نظام عداد الزوار الذكي
-// نظام عداد الزوار المصحح - يزيد بـ 1 فقط
-class CorrectedVisitorCounter {
-    constructor() {
-        this.baseCount = 150000;
-        this.currentCount = this.baseCount;
-        this.todayIncrement = 0;
-        this.totalIncrements = 0;
-        this.storageKey = 'emsa_corrected_counter_v3';
-        this.todayKey = 'emsa_today_counter';
-        this.init();
-    }
+        // إغلاق المودال عند الضغط خارج المحتوى
+        document.getElementById('servicesModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeServicesModal();
+            }
+        });
 
-    init() {
-        this.loadFromStorage();
-        this.setupElements();
-        this.setupEventListeners();
-        this.startAutoUpdates();
-        this.updateDisplay();
-        
-        // زيادة أولية عند تحميل الصفحة
-        setTimeout(() => {
-            this.incrementCounter();
-        }, 2000);
-        
-        console.log('✅ عداد الزوار المصحح جاهز. الرقم الحالي:', this.formatNumber(this.currentCount));
-    }
-
-    loadFromStorage() {
-        try {
-            // تحميل العدد الكلي
-            const savedCount = localStorage.getItem(this.storageKey);
-            if (savedCount) {
-                const parsed = parseInt(savedCount);
-                if (!isNaN(parsed)) {
-                    this.currentCount = parsed;
-                }
-            } else {
+        // نظام عداد الزوار المصحح - يزيد بـ 1 فقط
+        class CorrectedVisitorCounter {
+            constructor() {
+                this.baseCount = 150000;
                 this.currentCount = this.baseCount;
-                localStorage.setItem(this.storageKey, this.currentCount);
+                this.todayIncrement = 0;
+                this.totalIncrements = 0;
+                this.storageKey = 'emsa_corrected_counter_v3';
+                this.todayKey = 'emsa_today_counter';
+                this.init();
             }
-            
-            // تحميل زيادات اليوم
-            const today = new Date().toDateString();
-            const savedToday = localStorage.getItem(this.todayKey);
-            if (savedToday) {
-                const data = JSON.parse(savedToday);
-                if (data.date === today) {
-                    this.todayIncrement = data.increment || 0;
-                }
-            }
-        } catch (e) {
-            console.error('خطأ في تحميل البيانات:', e);
-            this.currentCount = this.baseCount;
-            this.todayIncrement = 0;
-        }
-    }
 
-    saveToStorage() {
-        try {
-            localStorage.setItem(this.storageKey, this.currentCount);
-            
-            const todayData = {
-                date: new Date().toDateString(),
-                increment: this.todayIncrement
-            };
-            localStorage.setItem(this.todayKey, JSON.stringify(todayData));
-        } catch (e) {
-            console.error('خطأ في حفظ البيانات:', e);
-        }
-    }
-
-    setupElements() {
-        this.counterElement = document.getElementById('liveVisitorCounter');
-        this.todayElement = document.getElementById('todayIncrement');
-        this.timeElement = document.getElementById('lastUpdateTime');
-        this.growthElement = document.getElementById('growthRate');
-    }
-
-    formatNumber(num) {
-        return num.toLocaleString('ar-SA');
-    }
-
-    incrementCounter(amount = 1) {
-        const oldCount = this.currentCount;
-        this.currentCount += amount;
-        this.todayIncrement += amount;
-        this.totalIncrements += amount;
-        
-        this.saveToStorage();
-        this.updateDisplay();
-        this.showIncrementEffect(oldCount, amount);
-        
-        console.log(`📊 زيادة العداد: ${this.formatNumber(oldCount)} → ${this.formatNumber(this.currentCount)} (+${amount})`);
-    }
-
-    updateDisplay() {
-        if (this.counterElement) {
-            this.counterElement.textContent = this.formatNumber(this.currentCount);
-            
-            // تأثير بسيط عند التحديث
-            this.counterElement.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                this.counterElement.style.transform = 'scale(1)';
-            }, 200);
-        }
-        
-        if (this.todayElement) {
-            this.todayElement.textContent = `+${this.todayIncrement}`;
-        }
-        
-        if (this.timeElement) {
-            const now = new Date();
-            const timeString = now.toLocaleTimeString('ar-SA', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
-            this.timeElement.textContent = timeString;
-        }
-        
-        if (this.growthElement) {
-            const growthRate = Math.min(Math.floor((this.todayIncrement / 100) * 100), 100);
-            this.growthElement.textContent = growthRate;
-        }
-    }
-
-    showIncrementEffect(oldCount, amount) {
-        const counterWrapper = document.querySelector('.visitor-counter-wrapper');
-        if (!counterWrapper) return;
-        
-        // تأثير زيادة الرقم
-        const effect = document.createElement('div');
-        effect.className = 'increment-effect';
-        effect.textContent = `+${amount}`;
-        effect.style.color = amount > 1 ? '#27ae60' : '#3498db';
-        effect.style.fontWeight = '800';
-        
-        counterWrapper.appendChild(effect);
-        
-        setTimeout(() => {
-            if (effect.parentNode) {
-                effect.parentNode.removeChild(effect);
-            }
-        }, 1000);
-    }
-
-    setupEventListeners() {
-        // زيادة عند التفاعل مع الموقع
-        const interactionEvents = [
-            'click',      // النقر
-            'scroll',     // التمرير
-            'mousemove',  // حركة الماوس
-            'keydown'     // الضغط على أزرار
-        ];
-        
-        // زيادة واحدة عند أول تفاعل
-        let hasInteracted = false;
-        interactionEvents.forEach(eventType => {
-            document.addEventListener(eventType, () => {
-                if (!hasInteracted) {
-                    hasInteracted = true;
-                    setTimeout(() => {
-                        this.incrementCounter();
-                    }, 1000);
-                }
-            }, { once: true });
-        });
-        
-        // زيادة عند تحميل الصفحة من جديد
-        window.addEventListener('beforeunload', () => {
-            // إعداد زيادة للزيارة القادمة
-            const nextVisitIncrement = {
-                date: new Date().toDateString(),
-                shouldIncrement: true
-            };
-            sessionStorage.setItem('nextVisitIncrement', JSON.stringify(nextVisitIncrement));
-        });
-        
-        // زيادة عند العودة للموقع
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
+            init() {
+                this.loadFromStorage();
+                this.setupElements();
+                this.setupEventListeners();
+                this.startAutoUpdates();
+                this.updateDisplay();
+                
+                // زيادة أولية عند تحميل الصفحة
                 setTimeout(() => {
                     this.incrementCounter();
-                }, 1500);
+                }, 2000);
+                
+                console.log('✅ عداد الزوار المصحح جاهز. الرقم الحالي:', this.formatNumber(this.currentCount));
+            }
+
+            loadFromStorage() {
+                try {
+                    // تحميل العدد الكلي
+                    const savedCount = localStorage.getItem(this.storageKey);
+                    if (savedCount) {
+                        const parsed = parseInt(savedCount);
+                        if (!isNaN(parsed)) {
+                            this.currentCount = parsed;
+                        }
+                    } else {
+                        this.currentCount = this.baseCount;
+                        localStorage.setItem(this.storageKey, this.currentCount);
+                    }
+                    
+                    // تحميل زيادات اليوم
+                    const today = new Date().toDateString();
+                    const savedToday = localStorage.getItem(this.todayKey);
+                    if (savedToday) {
+                        const data = JSON.parse(savedToday);
+                        if (data.date === today) {
+                            this.todayIncrement = data.increment || 0;
+                        }
+                    }
+                } catch (e) {
+                    console.error('خطأ في تحميل البيانات:', e);
+                    this.currentCount = this.baseCount;
+                    this.todayIncrement = 0;
+                }
+            }
+
+            saveToStorage() {
+                try {
+                    localStorage.setItem(this.storageKey, this.currentCount);
+                    
+                    const todayData = {
+                        date: new Date().toDateString(),
+                        increment: this.todayIncrement
+                    };
+                    localStorage.setItem(this.todayKey, JSON.stringify(todayData));
+                } catch (e) {
+                    console.error('خطأ في حفظ البيانات:', e);
+                }
+            }
+
+            setupElements() {
+                this.counterElement = document.getElementById('liveVisitorCounter');
+                this.todayElement = document.getElementById('todayIncrement');
+                this.timeElement = document.getElementById('lastUpdateTime');
+                this.growthElement = document.getElementById('growthRate');
+            }
+
+            formatNumber(num) {
+                return num.toLocaleString('ar-SA');
+            }
+
+            incrementCounter(amount = 1) {
+                const oldCount = this.currentCount;
+                this.currentCount += amount;
+                this.todayIncrement += amount;
+                this.totalIncrements += amount;
+                
+                this.saveToStorage();
+                this.updateDisplay();
+                this.showIncrementEffect(oldCount, amount);
+                
+                console.log(`📊 زيادة العداد: ${this.formatNumber(oldCount)} → ${this.formatNumber(this.currentCount)} (+${amount})`);
+            }
+
+            updateDisplay() {
+                if (this.counterElement) {
+                    this.counterElement.textContent = this.formatNumber(this.currentCount);
+                    
+                    // تأثير بسيط عند التحديث
+                    this.counterElement.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        this.counterElement.style.transform = 'scale(1)';
+                    }, 200);
+                }
+                
+                if (this.todayElement) {
+                    this.todayElement.textContent = `+${this.todayIncrement}`;
+                }
+                
+                if (this.timeElement) {
+                    const now = new Date();
+                    const timeString = now.toLocaleTimeString('ar-SA', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    this.timeElement.textContent = timeString;
+                }
+                
+                if (this.growthElement) {
+                    const growthRate = Math.min(Math.floor((this.todayIncrement / 100) * 100), 100);
+                    this.growthElement.textContent = growthRate;
+                }
+            }
+
+            showIncrementEffect(oldCount, amount) {
+                const counterWrapper = document.querySelector('.visitor-counter-wrapper');
+                if (!counterWrapper) return;
+                
+                // تأثير زيادة الرقم
+                const effect = document.createElement('div');
+                effect.className = 'increment-effect';
+                effect.textContent = `+${amount}`;
+                effect.style.color = amount > 1 ? '#27ae60' : '#3498db';
+                effect.style.fontWeight = '800';
+                
+                counterWrapper.appendChild(effect);
+                
+                setTimeout(() => {
+                    if (effect.parentNode) {
+                        effect.parentNode.removeChild(effect);
+                    }
+                }, 1000);
+            }
+
+            setupEventListeners() {
+                // زيادة عند التفاعل مع الموقع
+                const interactionEvents = [
+                    'click',      // النقر
+                    'scroll',     // التمرير
+                    'mousemove',  // حركة الماوس
+                    'keydown'     // الضغط على أزرار
+                ];
+                
+                // زيادة واحدة عند أول تفاعل
+                let hasInteracted = false;
+                interactionEvents.forEach(eventType => {
+                    document.addEventListener(eventType, () => {
+                        if (!hasInteracted) {
+                            hasInteracted = true;
+                            setTimeout(() => {
+                                this.incrementCounter();
+                            }, 1000);
+                        }
+                    }, { once: true });
+                });
+                
+                // زيادة عند تحميل الصفحة من جديد
+                window.addEventListener('beforeunload', () => {
+                    // إعداد زيادة للزيارة القادمة
+                    const nextVisitIncrement = {
+                        date: new Date().toDateString(),
+                        shouldIncrement: true
+                    };
+                    sessionStorage.setItem('nextVisitIncrement', JSON.stringify(nextVisitIncrement));
+                });
+                
+                // زيادة عند العودة للموقع
+                document.addEventListener('visibilitychange', () => {
+                    if (!document.hidden) {
+                        setTimeout(() => {
+                            this.incrementCounter();
+                        }, 1500);
+                    }
+                });
+                
+                // زيادة عند التمرير لرؤية العداد
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            setTimeout(() => {
+                                this.incrementCounter();
+                            }, 800);
+                        }
+                    });
+                }, { threshold: 0.3 });
+                
+                const counterSection = document.querySelector('.stats-section');
+                if (counterSection) {
+                    observer.observe(counterSection);
+                }
+            }
+
+            startAutoUpdates() {
+                // زيادة تلقائية كل 45-75 ثانية (بين 1-3 زيادة)
+                setInterval(() => {
+                    const randomIncrement = Math.floor(Math.random() * 3) + 1; // 1-3
+                    this.incrementCounter(randomIncrement);
+                }, 45000 + Math.random() * 30000);
+                
+                // زيادة عشوائية إضافية كل 2-4 دقائق
+                setInterval(() => {
+                    const shouldIncrement = Math.random() > 0.7; // 30% فرصة
+                    if (shouldIncrement) {
+                        this.incrementCounter(2);
+                    }
+                }, 120000 + Math.random() * 120000);
+            }
+        }
+
+        // تهيئة العداد عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', () => {
+            // تأخير بسيط لضمان تحميل كل شيء
+            setTimeout(() => {
+                window.visitorCounter = new CorrectedVisitorCounter();
+            }, 500);
+        });
+
+        // دالة لتصحيح العداد يدوياً إذا حدث خطأ
+        function resetCounterToBase() {
+            if (confirm('هل تريد إعادة تعيين عداد الزوار إلى 150,000؟')) {
+                localStorage.removeItem('emsa_corrected_counter_v3');
+                localStorage.removeItem('emsa_today_counter');
+                location.reload();
+            }
+        }
+
+        // اختصار لوحة المطورين: Ctrl+Shift+R لإعادة التعيين
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+                resetCounterToBase();
             }
         });
-        
-        // زيادة عند التمرير لرؤية العداد
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        this.incrementCounter();
-                    }, 800);
-                }
-            });
-        }, { threshold: 0.3 });
-        
-        const counterSection = document.querySelector('.stats-section');
-        if (counterSection) {
-            observer.observe(counterSection);
-        }
-    }
 
-    startAutoUpdates() {
-        // زيادة تلقائية كل 45-75 ثانية (بين 1-3 زيادة)
-        setInterval(() => {
-            const randomIncrement = Math.floor(Math.random() * 3) + 1; // 1-3
-            this.incrementCounter(randomIncrement);
-        }, 45000 + Math.random() * 30000);
-        
-        // زيادة عشوائية إضافية كل 2-4 دقائق
-        setInterval(() => {
-            const shouldIncrement = Math.random() > 0.7; // 30% فرصة
-            if (shouldIncrement) {
-                this.incrementCounter(2);
+        // نظام الواتساب المتكامل
+        // إعدادات الواتساب القابلة للتخصيص
+        const WhatsAppConfig = {
+            // رقم واتساب الشركة (تغييره هنا يغير جميع الروابط)
+            companyNumber: "+966501234567",
+            
+            // الرسائل الافتراضية
+            defaultMessages: {
+                greeting: "السلام عليكم،",
+                interest: "أنا مهتم بالاستثمار مع مجموعة امسا الدولية القابضة",
+                requestInfo: "أرغب في الحصول على مزيد من المعلومات حول:"
+            },
+            
+            // إعدادات التتبع
+            tracking: {
+                enabled: true,
+                maxLogs: 100,
+                saveToLocalStorage: true
+            },
+            
+            // تحديث رقم الواتساب
+            updateNumber: function(newNumber) {
+                this.companyNumber = newNumber;
+                console.log('✅ تم تحديث رقم الواتساب إلى:', newNumber);
+            },
+            
+            // الحصول على إحصائيات النقرات
+            getStats: function() {
+                const clicks = JSON.parse(localStorage.getItem('investment_clicks') || '[]');
+                return {
+                    totalClicks: clicks.length,
+                    todayClicks: clicks.filter(click => {
+                        const clickDate = new Date(click.timestamp).toDateString();
+                        const today = new Date().toDateString();
+                        return clickDate === today;
+                    }).length,
+                    clicksByAmount: clicks.reduce((acc, click) => {
+                        acc[click.amount] = (acc[click.amount] || 0) + 1;
+                        return acc;
+                    }, {})
+                };
             }
-        }, 120000 + Math.random() * 120000);
-    }
-}
+        };
 
-// تهيئة العداد عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', () => {
-    // تأخير بسيط لضمان تحميل كل شيء
-    setTimeout(() => {
-        window.visitorCounter = new CorrectedVisitorCounter();
-    }, 500);
-});
+        // دالة لفتح الواتساب مع رسالة مخصصة
+        function openWhatsAppInvestment(amount) {
+            // رقم واتساب الشركة
+            const whatsappNumber = WhatsAppConfig.companyNumber;
+            
+            // رسالة تلقائية بناءً على مبلغ الاستثمار
+            const messages = {
+                1000: `${WhatsAppConfig.defaultMessages.greeting} أنا مهتم بالاستثمار في العرض الأول بمبلغ 1,000 ﷼ ${WhatsAppConfig.defaultMessages.requestInfo} هذا العرض.`,
+                1500: `${WhatsAppConfig.defaultMessages.greeting} أنا مهتم بالاستثمار في العرض الثاني بمبلغ 1,500 ﷼ ${WhatsAppConfig.defaultMessages.requestInfo} هذا العرض.`,
+                3000: `${WhatsAppConfig.defaultMessages.greeting} أنا مهتم بالاستثمار في العرض الثالث بمبلغ 3,000 ﷼ ${WhatsAppConfig.defaultMessages.requestInfo} هذا العرض.`,
+                5000: `${WhatsAppConfig.defaultMessages.greeting} أنا مهتم بالاستثمار في العرض الرابع بمبلغ 5,000 ﷼ ${WhatsAppConfig.defaultMessages.requestInfo} هذا العرض.`,
+                10000: `${WhatsAppConfig.defaultMessages.greeting} أنا مهتم بالاستثمار في العرض الخامس (المميز) بمبلغ 10,000 ﷼ ${WhatsAppConfig.defaultMessages.requestInfo} هذا العرض.`,
+                20000: `${WhatsAppConfig.defaultMessages.greeting} أنا مهتم بالاستثمار في العرض السادس بمبلغ 20,000 ﷼ ${WhatsAppConfig.defaultMessages.requestInfo} هذا العرض.`
+            };
+            
+            // الحصول على الرسالة المناسبة أو رسالة افتراضية
+            const message = messages[amount] || `${WhatsAppConfig.defaultMessages.greeting} ${WhatsAppConfig.defaultMessages.interest} بمبلغ ${amount.toLocaleString('ar-SA')} ﷼. ${WhatsAppConfig.defaultMessages.requestInfo} العروض المتاحة.`;
+            
+            // تشفير الرسالة للرابط
+            const encodedMessage = encodeURIComponent(message);
+            
+            // إنشاء رابط الواتساب
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // عرض إشعار قبل التوجيه
+            showWhatsAppNotification(amount);
+            
+            // فتح الواتساب بعد تأخير بسيط
+            setTimeout(() => {
+                window.open(whatsappURL, '_blank');
+            }, 1500);
+            
+            // تسجيل الحدث لأغراض التحليل
+            logInvestmentClick(amount);
+        }
 
-// دالة لتصحيح العداد يدوياً إذا حدث خطأ
-function resetCounterToBase() {
-    if (confirm('هل تريد إعادة تعيين عداد الزوار إلى 150,000؟')) {
-        localStorage.removeItem('emsa_corrected_counter_v3');
-        localStorage.removeItem('emsa_today_counter');
-        location.reload();
-    }
-}
+        // دالة لعرض إشعار الواتساب
+        function showWhatsAppNotification(amount) {
+            const notification = document.getElementById('whatsappNotification');
+            const formattedAmount = amount.toLocaleString('ar-SA');
+            
+            // تحديث نص الإشعار
+            notification.querySelector('p').textContent = `سيتم إرسال رسالة تلقائية عن العرض بمبلغ ${formattedAmount} ﷼`;
+            
+            // إظهار الإشعار
+            notification.classList.add('show');
+            
+            // إخفاء الإشعار تلقائياً بعد 5 ثوانٍ
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 5000);
+        }
 
-// اختصار لوحة المطورين: Ctrl+Shift+R لإعادة التعيين
-document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key === 'R') {
-        resetCounterToBase();
-    }
-});
-</script>
+        // دالة لإغلاق الإشعار
+        function closeNotification() {
+            document.getElementById('whatsappNotification').classList.remove('show');
+        }
 
+        // دالة لتسجيل النقرات لأغراض التحليل
+        function logInvestmentClick(amount) {
+            if (!WhatsAppConfig.tracking.enabled) return;
+            
+            const clicks = JSON.parse(localStorage.getItem('investment_clicks') || '[]');
+            clicks.push({
+                amount: amount,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent
+            });
+            
+            // حفظ آخر 100 نقرة فقط
+            if (clicks.length > WhatsAppConfig.tracking.maxLogs) {
+                clicks.shift();
+            }
+            
+            localStorage.setItem('investment_clicks', JSON.stringify(clicks));
+            console.log(`📊 تم تسجيل نقرة على العرض بمبلغ ${amount} ﷼`);
+        }
+
+        // دالة لفتح واتساب عام
+        function openWhatsApp() {
+            const whatsappNumber = WhatsAppConfig.companyNumber;
+            const message = encodeURIComponent(`${WhatsAppConfig.defaultMessages.greeting} ${WhatsAppConfig.defaultMessages.interest}. ${WhatsAppConfig.defaultMessages.requestInfo} الخدمات والعروض المتاحة.`);
+            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+        }
+
+        // دالة لفتح واتساب من المودال
+        function openWhatsAppFromModal() {
+            const modalTitle = document.getElementById('modalTitle').textContent;
+            let amount = 0;
+            
+            // استخراج المبلغ من عنوان المودال
+            const amountMatch = modalTitle.match(/(\d+,?\d*)/);
+            if (amountMatch) {
+                amount = parseInt(amountMatch[1].replace(/,/g, ''));
+            }
+            
+            if (amount > 0) {
+                openWhatsAppInvestment(amount);
+            } else {
+                openWhatsApp();
+            }
+            
+            closeInvestmentModal();
+        }
+
+        // إضافة مستمعي الأحداث للأزرار الحالية
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث زر "ابدأ الاستثمار الآن"
+            const startInvestmentBtn = document.querySelector('.guarantees-section .btn-primary');
+            if (startInvestmentBtn) {
+                startInvestmentBtn.setAttribute('onclick', 'openWhatsApp()');
+            }
+        });
+
+        // اختصارات لوحة المطورين
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+Shift+W لعرض إحصائيات الواتساب
+            if (e.ctrlKey && e.shiftKey && e.key === 'W') {
+                e.preventDefault();
+                const stats = WhatsAppConfig.getStats();
+                alert(`📊 إحصائيات الواتساب:\n\nإجمالي النقرات: ${stats.totalClicks}\nنقرات اليوم: ${stats.todayClicks}\n\nتوزيع النقرات حسب المبلغ:\n${Object.entries(stats.clicksByAmount).map(([amount, count]) => `• ${amount} ﷼: ${count} نقرة`).join('\n')}`);
+            }
+            
+            // Ctrl+Shift+N لتغيير رقم الواتساب
+            if (e.ctrlKey && e.shiftKey && e.key === 'N') {
+                e.preventDefault();
+                const newNumber = prompt('أدخل رقم واتساب الشركة الجديد:', WhatsAppConfig.companyNumber);
+                if (newNumber && confirm(`هل تريد تغيير رقم الواتساب إلى ${newNumber}؟`)) {
+                    WhatsAppConfig.updateNumber(newNumber);
+                    alert('✅ تم تحديث رقم الواتساب بنجاح!');
+                }
+            }
+        });
+    </script>
+</body>
 </html>
