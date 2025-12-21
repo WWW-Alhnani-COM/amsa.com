@@ -650,15 +650,28 @@
             color: white;
         }
         
-        .bank-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
+    .bank-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: white;
+    padding: 5px;
+}
+.bank-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
         
-        .bank-card:hover .bank-icon {
-            color: var(--secondary);
-        }
+      .bank-card:hover .bank-icon img {
+    transform: scale(1.1);
+}
         
         .bank-name {
             font-weight: 700;
@@ -1433,7 +1446,12 @@
                 
                 <div class="banks-grid">
                     <div class="bank-card">
-                        <div class="bank-icon">🏦</div>
+                        <div class="bank-icon">
+                                  <img src="ra.jpg" 
+                     alt="شعار بنك الراجحي"
+                     onerror="handleBankLogoError(this, 'الراجحي')">
+            </div>
+                        </div>
                         <div class="bank-name">بنك الراجحي</div>
                     </div>
                     <div class="bank-card">
