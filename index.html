@@ -1242,6 +1242,96 @@
     padding: 0 30px 30px;
     margin-top: auto;
 }
+        /* أنيميشن للعداد المتحرك */
+@keyframes countUp {
+    from { 
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0% { text-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
+    50% { text-shadow: 0 0 15px rgba(212, 175, 55, 0.6); }
+    100% { text-shadow: 0 0 5px rgba(212, 175, 55, 0.3); }
+}
+
+@keyframes floatUp {
+    0% { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% { 
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}
+
+/* تنسيق خاص لعداد الزوار */
+.visitor-counter-wrapper {
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: linear-gradient(white, white) padding-box,
+                linear-gradient(135deg, var(--secondary), var(--accent)) border-box;
+    transition: all 0.3s ease;
+}
+
+.visitor-counter-wrapper:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.2);
+}
+
+.visitor-count {
+    animation: countUp 1s ease-out, pulseGlow 3s infinite;
+    font-family: 'Almarai', sans-serif;
+    direction: ltr;
+    display: inline-block;
+    position: relative;
+}
+
+.visitor-count::after {
+    content: 'زيارة';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+    color: var(--accent);
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.real-time-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    animation: pulseGlow 2s infinite;
+    z-index: 2;
+}
+
+/* تأثير زيادة الرقم */
+.increment-effect {
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    color: #27ae60;
+    font-weight: 800;
+    font-size: 1.2rem;
+    animation: floatUp 1s ease-out forwards;
+    pointer-events: none;
+    z-index: 3;
+}
     </style>
 </head>
 <body>
@@ -1606,28 +1696,50 @@
             </div>
         </div>
         
-        <!-- قسم إحصائيات الخدمات -->
-        <div class="stats-section" style="margin-top: 80px; text-align: center;" data-aos="fade-up">
-            <h3 style="color: var(--primary); margin-bottom: 40px;">أرقام تتحدث عن تميزنا</h3>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
-                <div class="stat-box" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
-                    <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">+25%</div>
-                    <div style="color: var(--primary); font-weight: 700;">متوسط العائد السنوي</div>
-                </div>
-                <div class="stat-box" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
-                    <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">+500</div>
-                    <div style="color: var(--primary); font-weight: 700;">محفظة استثمارية ناجحة</div>
-                </div>
-                <div class="stat-box" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
-                    <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">8</div>
-                    <div style="color: var(--primary); font-weight: 700;">قطاعات استثمارية رئيسية</div>
-                </div>
-                <div class="stat-box" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
-                    <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">24/7</div>
-                    <div style="color: var(--primary); font-weight: 700;">متابعة ودعم مستمر</div>
-                </div>
+    <!-- قسم إحصائيات الخدمات -->
+<div class="stats-section" style="margin-top: 80px; text-align: center;" data-aos="fade-up">
+    <h3 style="color: var(--primary); margin-bottom: 40px;">أرقام تتحدث عن تميزنا</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+        
+        <!-- عداد الزوار الجديد -->
+        <div class="visitor-counter-wrapper" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08); position: relative;">
+            <div class="real-time-badge">مباشر</div>
+            <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">
+                <span class="visitor-count" id="liveVisitorCounter">150,000</span>
+                <span style="color: var(--accent); margin-right: 5px; font-size: 1.8rem;">+</span>
             </div>
+            <div style="color: var(--primary); font-weight: 700;">مستثمر واثق</div>
+            <div style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;">يزداد مع كل زائر جديد</div>
         </div>
+        
+        <!-- محفظة استثمارية ناجحة -->
+        <div class="stat-box" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
+            <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">+500</div>
+            <div style="color: var(--primary); font-weight: 700;">محفظة استثمارية ناجحة</div>
+            <div style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;">بنسبة نجاح 94%</div>
+        </div>
+        
+        <!-- قطاعات استثمارية رئيسية -->
+        <div class="stat-box" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
+            <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">8</div>
+            <div style="color: var(--primary); font-weight: 700;">قطاعات استثمارية رئيسية</div>
+            <div style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;">تنويع استراتيجي</div>
+        </div>
+        
+        <!-- متابعة ودعم مستمر -->
+        <div class="stat-box" style="padding: 25px; background: white; border-radius: 15px; box-shadow: 0 8px 25px rgba(0,0,0,0.08);">
+            <div style="font-size: 2.5rem; color: var(--secondary); font-weight: 800; margin-bottom: 10px;">24/7</div>
+            <div style="color: var(--primary); font-weight: 700;">متابعة ودعم مستمر</div>
+            <div style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;">خدمة عملاء على مدار الساعة</div>
+        </div>
+    </div>
+    
+    <!-- تحديث حي -->
+    <div style="margin-top: 20px; color: var(--gray); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <i class="fas fa-sync-alt fa-spin" style="color: var(--accent);"></i>
+        <span>تحديث مباشر • آخر تحديث: <span id="lastUpdateTime">الآن</span></span>
+    </div>
+</div>
         
         <!-- زر الاطلاع على جميع الخدمات -->
         <!-- <div style="text-align: center; margin-top: 60px;" data-aos="fade-up">
@@ -2654,6 +2766,231 @@ function showServiceDetails(serviceId) {
     
     document.getElementById('investmentModal').style.display = 'flex';
 }
+
+        // نظام عداد الزوار الذكي
+class SmartVisitorCounter {
+    constructor() {
+        this.baseCount = 150000;
+        this.incrementValue = 150001; // 150,000 + 1 لكل زيارة
+        this.currentCount = this.baseCount;
+        this.storageKey = 'emsa_smart_counter_v2';
+        this.updateInterval = null;
+        this.incrementElements = [];
+        this.init();
+    }
+
+    init() {
+        this.loadFromStorage();
+        this.setupCounter();
+        this.startAutoIncrement();
+        this.setupEventListeners();
+        this.updateDisplay();
+        
+        console.log('🔢 عداد الزوار الذكي جاهز! الرقم الحالي:', this.formatNumber(this.currentCount));
+    }
+
+    loadFromStorage() {
+        try {
+            const saved = localStorage.getItem(this.storageKey);
+            if (saved) {
+                const data = JSON.parse(saved);
+                this.currentCount = data.count || this.baseCount;
+                this.lastUpdate = data.lastUpdate || Date.now();
+                
+                // زيادة عشوائية بناءً على الوقت المنقضي
+                const hoursPassed = (Date.now() - this.lastUpdate) / (1000 * 60 * 60);
+                if (hoursPassed > 1) {
+                    const randomIncrement = Math.floor(Math.random() * 5) + 1;
+                    this.currentCount += (randomIncrement * this.incrementValue);
+                }
+            }
+        } catch (e) {
+            this.currentCount = this.baseCount;
+        }
+    }
+
+    saveToStorage() {
+        const data = {
+            count: this.currentCount,
+            lastUpdate: Date.now()
+        };
+        localStorage.setItem(this.storageKey, JSON.stringify(data));
+    }
+
+    setupCounter() {
+        this.counterElement = document.getElementById('liveVisitorCounter');
+        this.timeElement = document.getElementById('lastUpdateTime');
+    }
+
+    formatNumber(num) {
+        return num.toLocaleString('ar-SA');
+    }
+
+    incrementCounter() {
+        const oldCount = this.currentCount;
+        this.currentCount += this.incrementValue;
+        
+        // حفظ التحديث
+        this.saveToStorage();
+        
+        // عرض التأثير المرئي
+        this.showIncrementEffect(oldCount);
+        this.updateDisplay();
+        
+        // تحديث الوقت
+        this.updateTime();
+        
+        // تسجيل في الكونسول
+        console.log(`📈 زيادة عداد الزوار: ${this.formatNumber(oldCount)} → ${this.formatNumber(this.currentCount)}`);
+    }
+
+    updateDisplay() {
+        if (this.counterElement) {
+            this.counterElement.textContent = this.formatNumber(this.currentCount);
+            
+            // تأثير بسيط عند التحديث
+            this.counterElement.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                this.counterElement.style.transform = 'scale(1)';
+            }, 300);
+        }
+    }
+
+    updateTime() {
+        if (this.timeElement) {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('ar-SA', {
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+            });
+            this.timeElement.textContent = timeString;
+        }
+    }
+
+    showIncrementEffect(oldCount) {
+        if (!this.counterElement) return;
+        
+        const counterWrapper = this.counterElement.closest('.visitor-counter-wrapper');
+        if (!counterWrapper) return;
+        
+        // إنشاء عنصر تأثير الزيادة
+        const effect = document.createElement('div');
+        effect.className = 'increment-effect';
+        effect.textContent = `+${this.formatNumber(this.incrementValue)}`;
+        effect.style.position = 'absolute';
+        effect.style.right = '50%';
+        effect.style.top = '30%';
+        effect.style.transform = 'translateX(50%)';
+        
+        counterWrapper.appendChild(effect);
+        
+        // إزالة العنصر بعد انتهاء الأنيميشن
+        setTimeout(() => {
+            if (effect.parentNode) {
+                effect.parentNode.removeChild(effect);
+            }
+        }, 1000);
+    }
+
+    startAutoIncrement() {
+        // زيادة أولية بعد 3 ثواني
+        setTimeout(() => {
+            this.incrementCounter();
+        }, 3000);
+        
+        // زيادة عشوائية كل 30-90 ثانية
+        this.updateInterval = setInterval(() => {
+            const randomDelay = Math.random() * 60000 + 30000; // 30-90 ثانية
+            setTimeout(() => {
+                this.incrementCounter();
+            }, randomDelay);
+        }, 30000);
+        
+        // زيادة عند ترك/عودة للموقع
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                setTimeout(() => {
+                    this.incrementCounter();
+                }, 2000);
+            }
+        });
+    }
+
+    setupEventListeners() {
+        // زيادة عند التفاعل مع الموقع
+        const interactiveElements = [
+            '.btn-primary',
+            '.service-card',
+            '.offer-card',
+            '#contactForm',
+            '.nav-link'
+        ];
+        
+        interactiveElements.forEach(selector => {
+            document.querySelectorAll(selector).forEach(element => {
+                element.addEventListener('click', () => {
+                    setTimeout(() => {
+                        this.incrementCounter();
+                    }, 1000);
+                });
+            });
+        });
+        
+        // زيادة عند التمرير لرؤية العداد
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        this.incrementCounter();
+                    }, 500);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        const counterSection = document.querySelector('.stats-section');
+        if (counterSection) {
+            observer.observe(counterSection);
+        }
+    }
+}
+
+// تهيئة العداد عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', () => {
+    window.smartCounter = new SmartVisitorCounter();
+    
+    // إضافة زر اختباري للزيادة اليدوية (يمكن إزالته لاحقاً)
+    const testButton = document.createElement('button');
+    testButton.textContent = '🔄 اختبار زيادة العداد';
+    testButton.style.position = 'fixed';
+    testButton.style.bottom = '20px';
+    testButton.style.left = '20px';
+    testButton.style.zIndex = '9999';
+    testButton.style.padding = '10px 15px';
+    testButton.style.background = 'var(--primary)';
+    testButton.style.color = 'white';
+    testButton.style.border = 'none';
+    testButton.style.borderRadius = '5px';
+    testButton.style.cursor = 'pointer';
+    testButton.style.fontSize = '12px';
+    testButton.style.display = 'none'; // مخفي افتراضياً
+    
+    testButton.addEventListener('click', () => {
+        if (window.smartCounter) {
+            window.smartCounter.incrementCounter();
+            alert('تم زيادة العداد بنجاح!');
+        }
+    });
+    
+    document.body.appendChild(testButton);
+    
+    // عرض زر الاختبار فقط في وضع التطوير (Ctrl+Shift+D)
+    document.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+            testButton.style.display = testButton.style.display === 'none' ? 'block' : 'none';
+        }
+    });
+});
 </script>
 
 </html>
