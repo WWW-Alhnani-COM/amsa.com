@@ -1332,6 +1332,41 @@
     pointer-events: none;
     z-index: 3;
 }
+        /* تأثيرات إضافية للعداد المصحح */
+.increment-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(39, 174, 96, 0.1);
+    color: #27ae60;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.counter-trend {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 0.8rem;
+    color: var(--accent);
+}
+
+.counter-trend.up {
+    color: #27ae60;
+}
+
+.counter-trend.down {
+    color: #e74c3c;
+}
     </style>
 </head>
 <body>
@@ -1696,7 +1731,7 @@
             </div>
         </div>
         
-    <!-- قسم إحصائيات الخدمات -->
+  <!-- قسم إحصائيات الخدمات -->
 <div class="stats-section" style="margin-top: 80px; text-align: center;" data-aos="fade-up">
     <h3 style="color: var(--primary); margin-bottom: 40px;">أرقام تتحدث عن تميزنا</h3>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
@@ -1710,6 +1745,10 @@
             </div>
             <div style="color: var(--primary); font-weight: 700;">مستثمر واثق</div>
             <div style="color: var(--gray); font-size: 0.9rem; margin-top: 5px;">يزداد مع كل زائر جديد</div>
+            <div style="color: var(--accent); font-size: 0.8rem; margin-top: 5px; font-weight: 600;">
+                <i class="fas fa-users"></i> 
+                <span id="todayIncrement">+0</span> اليوم
+            </div>
         </div>
         
         <!-- محفظة استثمارية ناجحة -->
@@ -1738,6 +1777,8 @@
     <div style="margin-top: 20px; color: var(--gray); font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px;">
         <i class="fas fa-sync-alt fa-spin" style="color: var(--accent);"></i>
         <span>تحديث مباشر • آخر تحديث: <span id="lastUpdateTime">الآن</span></span>
+        <span style="color: var(--accent); margin-right: 10px;">|</span>
+        <span><i class="fas fa-chart-line"></i> النمو اليومي: <span id="growthRate">0</span>%</span>
     </div>
 </div>
         
@@ -2768,80 +2809,99 @@ function showServiceDetails(serviceId) {
 }
 
         // نظام عداد الزوار الذكي
-class SmartVisitorCounter {
+// نظام عداد الزوار المصحح - يزيد بـ 1 فقط
+class CorrectedVisitorCounter {
     constructor() {
         this.baseCount = 150000;
-        this.incrementValue = 150001; // 150,000 + 1 لكل زيارة
         this.currentCount = this.baseCount;
-        this.storageKey = 'emsa_smart_counter_v2';
-        this.updateInterval = null;
-        this.incrementElements = [];
+        this.todayIncrement = 0;
+        this.totalIncrements = 0;
+        this.storageKey = 'emsa_corrected_counter_v3';
+        this.todayKey = 'emsa_today_counter';
         this.init();
     }
 
     init() {
         this.loadFromStorage();
-        this.setupCounter();
-        this.startAutoIncrement();
+        this.setupElements();
         this.setupEventListeners();
+        this.startAutoUpdates();
         this.updateDisplay();
         
-        console.log('🔢 عداد الزوار الذكي جاهز! الرقم الحالي:', this.formatNumber(this.currentCount));
+        // زيادة أولية عند تحميل الصفحة
+        setTimeout(() => {
+            this.incrementCounter();
+        }, 2000);
+        
+        console.log('✅ عداد الزوار المصحح جاهز. الرقم الحالي:', this.formatNumber(this.currentCount));
     }
 
     loadFromStorage() {
         try {
-            const saved = localStorage.getItem(this.storageKey);
-            if (saved) {
-                const data = JSON.parse(saved);
-                this.currentCount = data.count || this.baseCount;
-                this.lastUpdate = data.lastUpdate || Date.now();
-                
-                // زيادة عشوائية بناءً على الوقت المنقضي
-                const hoursPassed = (Date.now() - this.lastUpdate) / (1000 * 60 * 60);
-                if (hoursPassed > 1) {
-                    const randomIncrement = Math.floor(Math.random() * 5) + 1;
-                    this.currentCount += (randomIncrement * this.incrementValue);
+            // تحميل العدد الكلي
+            const savedCount = localStorage.getItem(this.storageKey);
+            if (savedCount) {
+                const parsed = parseInt(savedCount);
+                if (!isNaN(parsed)) {
+                    this.currentCount = parsed;
+                }
+            } else {
+                this.currentCount = this.baseCount;
+                localStorage.setItem(this.storageKey, this.currentCount);
+            }
+            
+            // تحميل زيادات اليوم
+            const today = new Date().toDateString();
+            const savedToday = localStorage.getItem(this.todayKey);
+            if (savedToday) {
+                const data = JSON.parse(savedToday);
+                if (data.date === today) {
+                    this.todayIncrement = data.increment || 0;
                 }
             }
         } catch (e) {
+            console.error('خطأ في تحميل البيانات:', e);
             this.currentCount = this.baseCount;
+            this.todayIncrement = 0;
         }
     }
 
     saveToStorage() {
-        const data = {
-            count: this.currentCount,
-            lastUpdate: Date.now()
-        };
-        localStorage.setItem(this.storageKey, JSON.stringify(data));
+        try {
+            localStorage.setItem(this.storageKey, this.currentCount);
+            
+            const todayData = {
+                date: new Date().toDateString(),
+                increment: this.todayIncrement
+            };
+            localStorage.setItem(this.todayKey, JSON.stringify(todayData));
+        } catch (e) {
+            console.error('خطأ في حفظ البيانات:', e);
+        }
     }
 
-    setupCounter() {
+    setupElements() {
         this.counterElement = document.getElementById('liveVisitorCounter');
+        this.todayElement = document.getElementById('todayIncrement');
         this.timeElement = document.getElementById('lastUpdateTime');
+        this.growthElement = document.getElementById('growthRate');
     }
 
     formatNumber(num) {
         return num.toLocaleString('ar-SA');
     }
 
-    incrementCounter() {
+    incrementCounter(amount = 1) {
         const oldCount = this.currentCount;
-        this.currentCount += this.incrementValue;
+        this.currentCount += amount;
+        this.todayIncrement += amount;
+        this.totalIncrements += amount;
         
-        // حفظ التحديث
         this.saveToStorage();
-        
-        // عرض التأثير المرئي
-        this.showIncrementEffect(oldCount);
         this.updateDisplay();
+        this.showIncrementEffect(oldCount, amount);
         
-        // تحديث الوقت
-        this.updateTime();
-        
-        // تسجيل في الكونسول
-        console.log(`📈 زيادة عداد الزوار: ${this.formatNumber(oldCount)} → ${this.formatNumber(this.currentCount)}`);
+        console.log(`📊 زيادة العداد: ${this.formatNumber(oldCount)} → ${this.formatNumber(this.currentCount)} (+${amount})`);
     }
 
     updateDisplay() {
@@ -2849,43 +2909,44 @@ class SmartVisitorCounter {
             this.counterElement.textContent = this.formatNumber(this.currentCount);
             
             // تأثير بسيط عند التحديث
-            this.counterElement.style.transform = 'scale(1.1)';
+            this.counterElement.style.transform = 'scale(1.05)';
             setTimeout(() => {
                 this.counterElement.style.transform = 'scale(1)';
-            }, 300);
+            }, 200);
         }
-    }
-
-    updateTime() {
+        
+        if (this.todayElement) {
+            this.todayElement.textContent = `+${this.todayIncrement}`;
+        }
+        
         if (this.timeElement) {
             const now = new Date();
             const timeString = now.toLocaleTimeString('ar-SA', {
                 hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
+                minute: '2-digit'
             });
             this.timeElement.textContent = timeString;
         }
+        
+        if (this.growthElement) {
+            const growthRate = Math.min(Math.floor((this.todayIncrement / 100) * 100), 100);
+            this.growthElement.textContent = growthRate;
+        }
     }
 
-    showIncrementEffect(oldCount) {
-        if (!this.counterElement) return;
-        
-        const counterWrapper = this.counterElement.closest('.visitor-counter-wrapper');
+    showIncrementEffect(oldCount, amount) {
+        const counterWrapper = document.querySelector('.visitor-counter-wrapper');
         if (!counterWrapper) return;
         
-        // إنشاء عنصر تأثير الزيادة
+        // تأثير زيادة الرقم
         const effect = document.createElement('div');
         effect.className = 'increment-effect';
-        effect.textContent = `+${this.formatNumber(this.incrementValue)}`;
-        effect.style.position = 'absolute';
-        effect.style.right = '50%';
-        effect.style.top = '30%';
-        effect.style.transform = 'translateX(50%)';
+        effect.textContent = `+${amount}`;
+        effect.style.color = amount > 1 ? '#27ae60' : '#3498db';
+        effect.style.fontWeight = '800';
         
         counterWrapper.appendChild(effect);
         
-        // إزالة العنصر بعد انتهاء الأنيميشن
         setTimeout(() => {
             if (effect.parentNode) {
                 effect.parentNode.removeChild(effect);
@@ -2893,48 +2954,45 @@ class SmartVisitorCounter {
         }, 1000);
     }
 
-    startAutoIncrement() {
-        // زيادة أولية بعد 3 ثواني
-        setTimeout(() => {
-            this.incrementCounter();
-        }, 3000);
+    setupEventListeners() {
+        // زيادة عند التفاعل مع الموقع
+        const interactionEvents = [
+            'click',      // النقر
+            'scroll',     // التمرير
+            'mousemove',  // حركة الماوس
+            'keydown'     // الضغط على أزرار
+        ];
         
-        // زيادة عشوائية كل 30-90 ثانية
-        this.updateInterval = setInterval(() => {
-            const randomDelay = Math.random() * 60000 + 30000; // 30-90 ثانية
-            setTimeout(() => {
-                this.incrementCounter();
-            }, randomDelay);
-        }, 30000);
+        // زيادة واحدة عند أول تفاعل
+        let hasInteracted = false;
+        interactionEvents.forEach(eventType => {
+            document.addEventListener(eventType, () => {
+                if (!hasInteracted) {
+                    hasInteracted = true;
+                    setTimeout(() => {
+                        this.incrementCounter();
+                    }, 1000);
+                }
+            }, { once: true });
+        });
         
-        // زيادة عند ترك/عودة للموقع
+        // زيادة عند تحميل الصفحة من جديد
+        window.addEventListener('beforeunload', () => {
+            // إعداد زيادة للزيارة القادمة
+            const nextVisitIncrement = {
+                date: new Date().toDateString(),
+                shouldIncrement: true
+            };
+            sessionStorage.setItem('nextVisitIncrement', JSON.stringify(nextVisitIncrement));
+        });
+        
+        // زيادة عند العودة للموقع
         document.addEventListener('visibilitychange', () => {
             if (!document.hidden) {
                 setTimeout(() => {
                     this.incrementCounter();
-                }, 2000);
+                }, 1500);
             }
-        });
-    }
-
-    setupEventListeners() {
-        // زيادة عند التفاعل مع الموقع
-        const interactiveElements = [
-            '.btn-primary',
-            '.service-card',
-            '.offer-card',
-            '#contactForm',
-            '.nav-link'
-        ];
-        
-        interactiveElements.forEach(selector => {
-            document.querySelectorAll(selector).forEach(element => {
-                element.addEventListener('click', () => {
-                    setTimeout(() => {
-                        this.incrementCounter();
-                    }, 1000);
-                });
-            });
         });
         
         // زيادة عند التمرير لرؤية العداد
@@ -2943,53 +3001,56 @@ class SmartVisitorCounter {
                 if (entry.isIntersecting) {
                     setTimeout(() => {
                         this.incrementCounter();
-                    }, 500);
+                    }, 800);
                 }
             });
-        }, { threshold: 0.5 });
+        }, { threshold: 0.3 });
         
         const counterSection = document.querySelector('.stats-section');
         if (counterSection) {
             observer.observe(counterSection);
         }
     }
+
+    startAutoUpdates() {
+        // زيادة تلقائية كل 45-75 ثانية (بين 1-3 زيادة)
+        setInterval(() => {
+            const randomIncrement = Math.floor(Math.random() * 3) + 1; // 1-3
+            this.incrementCounter(randomIncrement);
+        }, 45000 + Math.random() * 30000);
+        
+        // زيادة عشوائية إضافية كل 2-4 دقائق
+        setInterval(() => {
+            const shouldIncrement = Math.random() > 0.7; // 30% فرصة
+            if (shouldIncrement) {
+                this.incrementCounter(2);
+            }
+        }, 120000 + Math.random() * 120000);
+    }
 }
 
 // تهيئة العداد عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', () => {
-    window.smartCounter = new SmartVisitorCounter();
-    
-    // إضافة زر اختباري للزيادة اليدوية (يمكن إزالته لاحقاً)
-    const testButton = document.createElement('button');
-    testButton.textContent = '🔄 اختبار زيادة العداد';
-    testButton.style.position = 'fixed';
-    testButton.style.bottom = '20px';
-    testButton.style.left = '20px';
-    testButton.style.zIndex = '9999';
-    testButton.style.padding = '10px 15px';
-    testButton.style.background = 'var(--primary)';
-    testButton.style.color = 'white';
-    testButton.style.border = 'none';
-    testButton.style.borderRadius = '5px';
-    testButton.style.cursor = 'pointer';
-    testButton.style.fontSize = '12px';
-    testButton.style.display = 'none'; // مخفي افتراضياً
-    
-    testButton.addEventListener('click', () => {
-        if (window.smartCounter) {
-            window.smartCounter.incrementCounter();
-            alert('تم زيادة العداد بنجاح!');
-        }
-    });
-    
-    document.body.appendChild(testButton);
-    
-    // عرض زر الاختبار فقط في وضع التطوير (Ctrl+Shift+D)
-    document.addEventListener('keydown', (e) => {
-        if (e.ctrlKey && e.shiftKey && e.key === 'D') {
-            testButton.style.display = testButton.style.display === 'none' ? 'block' : 'none';
-        }
-    });
+    // تأخير بسيط لضمان تحميل كل شيء
+    setTimeout(() => {
+        window.visitorCounter = new CorrectedVisitorCounter();
+    }, 500);
+});
+
+// دالة لتصحيح العداد يدوياً إذا حدث خطأ
+function resetCounterToBase() {
+    if (confirm('هل تريد إعادة تعيين عداد الزوار إلى 150,000؟')) {
+        localStorage.removeItem('emsa_corrected_counter_v3');
+        localStorage.removeItem('emsa_today_counter');
+        location.reload();
+    }
+}
+
+// اختصار لوحة المطورين: Ctrl+Shift+R لإعادة التعيين
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'R') {
+        resetCounterToBase();
+    }
 });
 </script>
 
