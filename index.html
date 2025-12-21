@@ -1049,6 +1049,199 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* Services Section - UPDATED */
+#services {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+    padding: 100px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+#services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, rgba(12, 59, 46, 0.1), rgba(212, 175, 55, 0.1));
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+}
+
+#services::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(12, 59, 46, 0.1));
+    border-radius: 50%;
+    transform: translate(-30%, 30%);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.service-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    border: 2px solid transparent;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+    border-color: var(--secondary);
+}
+
+/* إضافة شعار موصى به لبعض البطاقات */
+.service-card.recommended {
+    border: 3px solid var(--secondary);
+    position: relative;
+}
+
+.recommended-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--secondary);
+    color: var(--primary);
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.4);
+}
+
+.service-icon {
+    height: 180px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.service-icon::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.service-card:hover .service-icon::after {
+    transform: translateX(100%);
+}
+
+.service-content {
+    padding: 30px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.service-content h3 {
+    margin-bottom: 15px;
+    color: var(--primary);
+    font-size: 1.8rem;
+}
+
+.service-content > p {
+    color: var(--gray);
+    margin-bottom: 20px;
+    line-height: 1.6;
+    flex-grow: 0;
+}
+
+.service-content ul {
+    list-style: none;
+    padding-right: 0;
+    margin-top: 15px;
+    flex-grow: 1;
+}
+
+.service-content ul li {
+    padding: 8px 0;
+    padding-right: 25px;
+    position: relative;
+    border-bottom: 1px solid #f0f0f0;
+    color: var(--dark);
+}
+
+.service-content ul li:before {
+    content: '✓';
+    position: absolute;
+    right: 0;
+    color: var(--accent);
+    font-weight: bold;
+}
+
+/* إضافة قسم تفاصيل الربح أسفل كل بطاقة */
+.service-details {
+    background: rgba(12, 59, 46, 0.05);
+    padding: 15px 30px;
+    border-top: 1px solid #eee;
+    margin-top: auto;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.detail-label {
+    color: var(--gray);
+    font-weight: 600;
+}
+
+.detail-value {
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.profit-highlight {
+    color: #27ae60;
+    font-weight: 800;
+    animation: pulseProfit 2s infinite;
+}
+
+@keyframes pulseProfit {
+    0% { color: #27ae60; }
+    50% { color: #2ecc71; }
+    100% { color: #27ae60; }
+}
+
+/* زر التفاصيل */
+.service-cta {
+    padding: 0 30px 30px;
+    margin-top: auto;
+}
     </style>
 </head>
 <body>
@@ -1169,7 +1362,7 @@
         </div>
     </section>
 
- <!-- خدماتنا الاستثمارية - النسخة النهائية -->
+<!-- خدماتنا الاستثمارية - النسخة المحسنة -->
 <section class="section" id="services" style="background-color: #f8f9fa;">
     <div class="container">
         <h2 class="section-title" data-aos="fade-up">خدماتنا الاستثمارية المتكاملة</h2>
@@ -1186,16 +1379,24 @@
                 <div class="service-content">
                     <h3>إدارة المحافظ الاستثمارية</h3>
                     <p>إدارة محافظ استثمارية متنوعة تحقق عوائد تنافسية مع إدارة متكاملة للمخاطر باستخدام أحدث الأدوات التحليلية</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>محافظ النمو المتوازن</li>
-                        <li>محافظ الدخل الثابت</li>
-                        <li>المحافظ الدفاعية</li>
-                        <li>محافظ النمو العدواني</li>
-                        <li>مراقبة ومتابعة مستمرة</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">العائد المتوقع:</strong> 10-25% سنوياً
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">العائد المتوقع:</span>
+                            <span class="detail-value profit-highlight">10-25% سنوياً</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">الحد الأدنى:</span>
+                            <span class="detail-value">100,000 ﷼</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(1)">
+                            <i class="fas fa-info-circle"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -1207,16 +1408,24 @@
                 <div class="service-content">
                     <h3>استثمارات مالية للشركات</h3>
                     <p>حلول استثمارية متخصصة للشركات والمؤسسات لتحسين أدائها المالي وزيادة قيمتها السوقية</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>عمليات الاندماج والاستحواذ</li>
-                        <li>التقييم المالي للشركات</li>
-                        <li>إعادة الهيكلة المالية</li>
-                        <li>الدراسات الجدوى الاقتصادية</li>
-                        <li>تمويل المشاريع التوسعية</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">القيمة المضافة:</strong> زيادة القيمة السوقية بنسبة 20-50%
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">القيمة المضافة:</span>
+                            <span class="detail-value profit-highlight">20-50% زيادة</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">المدة:</span>
+                            <span class="detail-value">3-6 أشهر</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(2)">
+                            <i class="fas fa-info-circle"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -1228,37 +1437,54 @@
                 <div class="service-content">
                     <h3>التداول في الأسواق المالية</h3>
                     <p>خدمات تداول متقدمة في الأسواق المحلية والعالمية باستخدام منصات متطورة وتحليل فني متقدم</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>تداول الأسهم السعودية والدولية</li>
-                        <li>تداول العملات (الفوركس)</li>
-                        <li>السلع والعقود الآجلة</li>
-                        <li>الخيارات والمشتقات المالية</li>
-                        <li>التداول الآلي والروبوتات</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">المميزات:</strong> سيولة عالية، تنوع، فرص ربح سريعة
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">السيولة:</span>
+                            <span class="detail-value profit-highlight">عالية</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">الدعم:</span>
+                            <span class="detail-value">24/7</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(3)">
+                            <i class="fas fa-info-circle"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
             
             <!-- الخدمة 4: الاستثمار في التكنولوجيا -->
-            <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="service-card recommended" data-aos="fade-up" data-aos-delay="300">
+                <div class="recommended-badge">⭐ الأكثر طلباً</div>
                 <div class="service-icon">
                     <i class="fas fa-microchip"></i>
                 </div>
                 <div class="service-content">
                     <h3>الاستثمار في التكنولوجيا</h3>
                     <p>الاستثمار في قطاع التكنولوجيا المالية والشركات التقنية الناشئة ذات النمو المتسارع</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>التكنولوجيا المالية (FinTech)</li>
-                        <li>الذكاء الاصطناعي والتعلم الآلي</li>
-                        <li>بلوك تشين والعملات الرقمية</li>
-                        <li>منصات التجارة الإلكترونية</li>
-                        <li>التطبيقات والبرمجيات المتخصصة</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">نسبة النمو:</strong> 30-100% سنوياً في بعض القطاعات
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">نسبة النمو:</span>
+                            <span class="detail-value profit-highlight">30-100% سنوياً</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">القطاعات:</span>
+                            <span class="detail-value">5+</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%; background: linear-gradient(135deg, var(--secondary), var(--gold-light));" onclick="showServiceDetails(4)">
+                            <i class="fas fa-crown"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -1270,37 +1496,54 @@
                 <div class="service-content">
                     <h3>خدمات الثروات الخاصة</h3>
                     <p>حلول مالية حصرية وشخصية للأفراد ذوي الثروات العالية (HNWI) مع هوامش ربحية متميزة</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>التخطيط المالي الشامل</li>
-                        <li>إدارة الثروات متعددة الأجيال</li>
-                        <li>الاستثمارات الحصرية والخاصة</li>
-                        <li>التخطيط الضريبي والتركة</li>
-                        <li>الحماية المالية والمخاطر</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">الحد الأدنى:</strong> 5 مليون ريال، هوامش ربح 15-40%
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">الحد الأدنى:</span>
+                            <span class="detail-value">5 مليون ﷼</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">هامش الربح:</span>
+                            <span class="detail-value profit-highlight">15-40%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(5)">
+                            <i class="fas fa-info-circle"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
             
             <!-- الخدمة 6: الاستثمار في المشاريع الكبرى -->
-            <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-card recommended" data-aos="fade-up" data-aos-delay="100">
+                <div class="recommended-badge">⭐ مميز</div>
                 <div class="service-icon">
                     <i class="fas fa-city"></i>
                 </div>
                 <div class="service-content">
                     <h3>الاستثمار في المشاريع الكبرى</h3>
                     <p>مشاركة في المشاريع الوطنية الكبرى والمبادرات التنموية العملاقة في المملكة العربية السعودية</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>مشروع نيوم - المدينة المستقبلية</li>
-                        <li>مشروع البحر الأحمر - السياحة الفاخرة</li>
-                        <li>مشروع القدية - الترفيه والرياضة</li>
-                        <li>مشروع أمالا - الوجهة السياحية</li>
-                        <li>مدينة الرياض الكبرى - التطوير الحضري</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">مدة الاستثمار:</strong> 5-10 سنوات، عوائد 20-35% سنوياً
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">المدة:</span>
+                            <span class="detail-value">5-10 سنوات</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">العائد السنوي:</span>
+                            <span class="detail-value profit-highlight">20-35%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(6)">
+                            <i class="fas fa-info-circle"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -1312,16 +1555,24 @@
                 <div class="service-content">
                     <h3>استثمارات القطاعات الواعدة</h3>
                     <p>التركيز على القطاعات الاستراتيجية التي تدعم رؤية المملكة 2030 وتتمتع بإمكانيات نمو هائلة</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>الطاقة المتجددة والنظيفة</li>
-                        <li>السياحة والترفيه والضيافة</li>
-                        <li>الرعاية الصحية والتقنية الطبية</li>
-                        <li>الخدمات اللوجستية والنقل</li>
-                        <li>التعدين والصناعات التحويلية</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">دعم حكومي:</strong> حوافز وإعفاءات ضريبية
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">الحوافز:</span>
+                            <span class="detail-value">إعفاءات ضريبية</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">الدعم:</span>
+                            <span class="detail-value profit-highlight">حكومي</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(7)">
+                            <i class="fas fa-info-circle"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
             
@@ -1333,16 +1584,24 @@
                 <div class="service-content">
                     <h3>الاستثمار في الأسهم الدولية</h3>
                     <p>تنويع المحفظة الاستثمارية عبر الاستثمار في الأسواق العالمية والشركات العالمية الرائدة</p>
-                    <ul style="margin-top: 15px; padding-right: 20px;">
-                        <li>بورصة نيويورك (NYSE)</li>
-                        <li>بورصة ناسداك (NASDAQ)</li>
-                        <li>بورصة لندن (LSE)</li>
-                        <li>بورصة هونغ كونغ (HKEX)</li>
-                        <li>أسواق الأسهم الأوروبية والآسيوية</li>
-                    </ul>
-                    <!-- <div style="margin-top: 20px; padding: 12px; background: rgba(12, 59, 46, 0.05); border-radius: 8px; border-right: 3px solid var(--accent);">
-                        <strong style="color: var(--primary);">مزايا:</strong> تنويع جغرافي، استقرار، فرص نمو عالمية
-                    </div> -->
+                    
+                    <div class="service-details">
+                        <div class="detail-item">
+                            <span class="detail-label">المزايا:</span>
+                            <span class="detail-value">تنويع جغرافي</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">الاستقرار:</span>
+                            <span class="detail-value profit-highlight">عالي</span>
+                        </div>
+                    </div>
+                    
+                    <div class="service-cta">
+                        <button class="btn btn-primary" style="width: 100%;" onclick="showServiceDetails(8)">
+                            <i class="fas fa-info-circle"></i>
+                            عرض التفاصيل
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1379,7 +1638,6 @@
         </div>
     </div>
 </section>
-
 <!-- Modal تفاصيل الخدمات -->
 <div id="servicesModal" class="investment-modal">
     <div class="modal-content" style="max-width: 800px;">
@@ -2307,6 +2565,95 @@ document.getElementById('servicesModal').addEventListener('click', function(e) {
         closeServicesModal();
     }
 });
+
+        // دالة لعرض تفاصيل الخدمة
+function showServiceDetails(serviceId) {
+    const services = {
+        1: {
+            title: "إدارة المحافظ الاستثمارية",
+            details: "محافظ استثمارية متنوعة تحقق عوائد تنافسية مع إدارة متكاملة للمخاطر باستخدام أحدث الأدوات التحليلية. تشمل محافظ النمو المتوازن، محافظ الدخل الثابت، المحافظ الدفاعية، ومحافظ النمو العدواني.",
+            features: ["مراقبة مستمرة", "تعديل استراتيجي شهري", "تقارير أسبوعية", "متابعة السوق 24/7"]
+        },
+        2: {
+            title: "استثمارات مالية للشركات",
+            details: "حلول استثمارية متخصصة للشركات والمؤسسات لتحسين أدائها المالي وزيادة قيمتها السوقية. تشمل عمليات الاندماج والاستحواذ، التقييم المالي، إعادة الهيكلة، والدراسات الجدوى.",
+            features: ["زيادة القيمة السوقية 20-50%", "دراسات جدوى شاملة", "تمويل المشاريع التوسعية"]
+        },
+        3: {
+            title: "التداول في الأسواق المالية",
+            details: "خدمات تداول متقدمة في الأسواق المحلية والعالمية باستخدام منصات متطورة وتحليل فني متقدم. تشمل تداول الأسهم، العملات، السلع، والعقود الآجلة.",
+            features: ["سيولة عالية", "تحليل فني متقدم", "منصات تداول متطورة", "فرص ربح سريعة"]
+        },
+        4: {
+            title: "الاستثمار في التكنولوجيا",
+            details: "الاستثمار في قطاع التكنولوجيا المالية والشركات التقنية الناشئة ذات النمو المتسارع. تشمل التكنولوجيا المالية، الذكاء الاصطناعي، بلوك تشين، والعملات الرقمية.",
+            features: ["نمو 30-100% سنوياً", "قطاعات تقنية واعدة", "استثمارات في شركات ناشئة"]
+        },
+        5: {
+            title: "خدمات الثروات الخاصة",
+            details: "حلول مالية حصرية وشخصية للأفراد ذوي الثروات العالية مع هوامش ربحية متميزة. تشمل التخطيط المالي الشامل، إدارة الثروات متعددة الأجيال، والاستثمارات الحصرية.",
+            features: ["مدير حساب شخصي", "فرص استثمار حصرية", "تخطيط ضريبي متقدم", "حماية مالية شاملة"]
+        },
+        6: {
+            title: "الاستثمار في المشاريع الكبرى",
+            details: "مشاركة في المشاريع الوطنية الكبرى والمبادرات التنموية العملاقة في المملكة العربية السعودية ضمن رؤية 2030.",
+            features: ["مشروع نيوم", "مشروع البحر الأحمر", "مشروع القدية", "مشروع أمالا", "مدينة الرياض الكبرى"]
+        },
+        7: {
+            title: "استثمارات القطاعات الواعدة",
+            details: "التركيز على القطاعات الاستراتيجية التي تدعم رؤية المملكة 2030 وتتمتع بإمكانيات نمو هائلة.",
+            features: ["الطاقة المتجددة", "السياحة والترفيه", "الرعاية الصحية", "الخدمات اللوجستية", "التعدين والصناعات"]
+        },
+        8: {
+            title: "الاستثمار في الأسهم الدولية",
+            details: "تنويع المحفظة الاستثمارية عبر الاستثمار في الأسواق العالمية والشركات العالمية الرائدة.",
+            features: ["بورصة نيويورك", "بورصة ناسداك", "بورصة لندن", "بورصة هونغ كونغ", "أسواق أوروبية وآسيوية"]
+        }
+    };
+
+    const service = services[serviceId];
+    
+    document.getElementById('modalTitle').textContent = `تفاصيل خدمة ${service.title}`;
+    
+    document.getElementById('modalContent').innerHTML = `
+        <div style="margin-bottom: 30px;">
+            <h4 style="color: var(--accent); margin-bottom: 15px;">${service.title}</h4>
+            <p style="color: var(--gray); line-height: 1.8; margin-bottom: 20px;">${service.details}</p>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 12px; margin-bottom: 20px;">
+                <h5 style="color: var(--primary); margin-bottom: 15px;">المميزات الرئيسية:</h5>
+                <ul style="padding-right: 20px; margin-bottom: 0;">
+                    ${service.features.map(feature => `<li style="margin-bottom: 10px; padding-right: 10px; color: var(--dark);">${feature}</li>`).join('')}
+                </ul>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, rgba(12, 59, 46, 0.05), rgba(212, 175, 55, 0.05)); padding: 20px; border-radius: 12px; border-right: 4px solid var(--secondary);">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <i class="fas fa-clock" style="color: var(--secondary);"></i>
+                    <span style="font-weight: 700; color: var(--primary);">المدة:</span>
+                    <span>تختلف حسب نوع الخدمة</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <i class="fas fa-chart-line" style="color: var(--secondary);"></i>
+                    <span style="font-weight: 700; color: var(--primary);">العائد المتوقع:</span>
+                    <span>يختلف حسب مستوى المخاطرة</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center;">
+            <button class="btn btn-primary" onclick="requestServiceConsultation(${serviceId})" style="margin-bottom: 10px;">
+                <i class="fas fa-calendar-check"></i>
+                طلب استشارة مجانية
+            </button>
+            <p style="color: var(--gray); font-size: 0.9rem; margin-top: 10px;">
+                سيتصل بك مستشارنا خلال 24 ساعة
+            </p>
+        </div>
+    `;
+    
+    document.getElementById('investmentModal').style.display = 'flex';
+}
 </script>
 
 </html>
