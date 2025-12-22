@@ -2785,11 +2785,22 @@
         }
 
         // دالة لفتح واتساب عام
-        function openWhatsApp() {
-            const whatsappNumber = WhatsAppConfig.companyNumber;
-            const message = encodeURIComponent(`${WhatsAppConfig.defaultMessages.greeting} ${WhatsAppConfig.defaultMessages.interest}. ${WhatsAppConfig.defaultMessages.requestInfo} الخدمات والعروض المتاحة.`);
-            window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-        }
+     // دالة لفتح واتساب عام
+function openWhatsApp() {
+    const whatsappNumber = WhatsAppConfig.companyNumber;
+    const message = encodeURIComponent(`${WhatsAppConfig.defaultMessages.greeting} ${WhatsAppConfig.defaultMessages.interest}. ${WhatsAppConfig.defaultMessages.requestInfo} الخدمات والعروض المتاحة.`);
+    
+    // طريقة أكثر فعالية تفتح الواتساب بشكل مباشر
+    const whatsappURL = `https://wa.me/${whatsappNumber}?text=${message}`;
+    
+    // محاولة فتح في نافذة جديدة
+    const newWindow = window.open(whatsappURL, '_blank');
+    
+    // إذا منع المتصفح النافذة المنبثقة، افتح في نفس النافذة
+    if (!newWindow || newWindow.closed || typeof newWindow.closed == 'undefined') {
+        window.location.href = whatsappURL;
+    }
+}
 
         // دالة لفتح واتساب من المودال
         function openWhatsAppFromModal() {
