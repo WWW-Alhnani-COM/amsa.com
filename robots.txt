@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://amsa-pi.vercel.app/sitemap.xml
+
+# Host
+Host: https://amsa-pi.vercel.app
+
+# Crawl-delay
+Crawl-delay: 2
