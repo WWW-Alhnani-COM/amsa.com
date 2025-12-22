@@ -5,8 +5,12 @@ Disallow: /private/
 
 Sitemap: https://amsa-pi.vercel.app/sitemap.xml
 
-# Host
-Host: https://amsa-pi.vercel.app
+# Googlebot
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
 
-# Crawl-delay
+# Bingbot
+User-agent: Bingbot
+Allow: /
 Crawl-delay: 2
