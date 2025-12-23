@@ -1,9 +1,20 @@
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17824491699"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+<!—Google tag (gtag.js) 
 
-  gtag('config', 'AW-17824491699');
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-17824491699"></script>
+
+<script>
+
+  Window.dataLayer = window.dataLayer || [];
+
+  Function gtag(){dataLayer.push(arguments);}
+
+  Gtag('js', new Date());
+
+
+
+  Gtag('config', 'AW-17824491699');
+
 </script>
+
+
+
