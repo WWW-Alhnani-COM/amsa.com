@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة المستثمرين | مجموعة امسا الدولية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <title>بوابة الوصول | مجموعة امسا الدولية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -13,7 +13,6 @@
             --accent: #1E6B52;
             --light: #F8F9FA;
             --white: #ffffff;
-            --error: #e74c3c;
         }
 
         body {
@@ -24,21 +23,24 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
+        /* حاوية النماذج الرئيسية */
         .auth-card {
             background: var(--white);
             width: 100%;
-            max-width: 480px;
+            max-width: 450px;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             text-align: center;
+            z-index: 10;
         }
 
-        .logo-img { width: 90px; margin-bottom: 20px; }
-        h2 { color: var(--primary); margin-bottom: 10px; }
-        p { color: #666; margin-bottom: 25px; }
+        .logo-img { width: 80px; margin-bottom: 20px; }
+        h2 { color: var(--primary); margin-bottom: 10px; font-weight: 800; }
+        p { color: #666; font-size: 0.9rem; margin-bottom: 25px; }
 
         .form-group { margin-bottom: 15px; text-align: right; }
         label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--primary); }
@@ -56,165 +58,183 @@
             font-weight: 700; cursor: pointer; font-size: 1rem; margin-top: 10px;
         }
 
-        /* Verification OTP */
-        .otp-display { font-size: 1.5rem; letter-spacing: 10px; font-weight: 800; color: var(--secondary); margin: 15px 0; }
+        .switch-link { margin-top: 20px; font-size: 0.9rem; color: #777; }
+        .switch-link a { color: var(--accent); text-decoration: none; font-weight: 700; cursor: pointer; }
 
-        /* Notification Styling */
+        /* إشعار التوثيق في الزاوية اليمنى */
         #identityNotice {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 320px;
+            width: 350px;
             background: white;
-            border-right: 5px solid var(--secondary);
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            border-radius: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             z-index: 9999;
-            text-align: right;
+            direction: rtl;
+            border-right: 6px solid var(--secondary);
+            padding: 20px;
             display: none; /* يظهر بعد تسجيل الدخول */
+            animation: slideIn 0.5s ease-out;
         }
-        .notice-title { color: var(--primary); font-weight: 800; margin-bottom: 10px; display: block; }
-        .notice-body { font-size: 0.85rem; line-height: 1.6; color: #444; margin-bottom: 15px; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* المربع المقسوم لصور الهوية */
+        .camera-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+            border: 1px solid #eee;
+            padding: 5px;
+            border-radius: 12px;
+        }
+        .camera-section {
+            background: #fdfcf7;
+            border: 2px dashed var(--secondary);
+            border-radius: 10px;
+            height: 120px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .camera-section:hover { background: #f7f1e3; }
+        .camera-section i { font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
+        .camera-section span { font-size: 0.75rem; color: #555; font-weight: bold; }
 
         .hidden { display: none; }
-        .switch-link { margin-top: 20px; font-size: 0.9rem; }
-        .switch-link a { color: var(--accent); text-decoration: none; font-weight: 700; }
+        .otp-code { font-size: 2rem; letter-spacing: 10px; font-weight: 800; color: var(--secondary); margin: 20px 0; }
     </style>
 </head>
 <body>
 
-    <div class="auth-card" id="authCard">
-        <img src="amsa-logo@4x.png" alt="Logo" class="logo-img">
+    <div class="auth-card" id="mainCard">
+        <img src="amsa-logo@4x.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80'">
         
-        <div id="loginBox">
-            <h2>تسجيل الدخول</h2>
-            <p>أدخل بياناتك للوصول إلى محفظتك</p>
-            <form onsubmit="handleAuth(event, 'login')">
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" required placeholder="example@mail.com">
-                </div>
-                <div class="form-group">
-                    <label>كلمة المرور</label>
-                    <input type="password" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn-auth">دخول</button>
-            </form>
-            <div class="switch-link">
-                ليس لديك حساب؟ <a href="#" onclick="showSection('register')">فتح حساب جديد</a>
-            </div>
-        </div>
-
-        <div id="registerBox" class="hidden">
-            <h2>فتح حساب استثماري</h2>
-            <form onsubmit="handleAuth(event, 'verify')">
+        <div id="registerForm">
+            <h2>إنشاء حساب</h2>
+            <form onsubmit="toOTP(event)">
                 <div class="form-group">
                     <label>الاسم الكامل</label>
-                    <input type="text" required placeholder="الاسم كما هو في الهوية">
+                    <input type="text" placeholder="أدخل اسمك الثلاثي" required>
                 </div>
                 <div class="form-group">
                     <label>البريد الإلكتروني</label>
-                    <input type="email" required placeholder="example@mail.com">
+                    <input type="email" placeholder="example@mail.com" required>
                 </div>
                 <div class="form-group">
                     <label>كلمة المرور</label>
-                    <input type="password" id="regPass" required placeholder="••••••••">
+                    <input type="password" id="p1" required>
                 </div>
                 <div class="form-group">
                     <label>تأكيد كلمة المرور</label>
-                    <input type="password" id="regConfirm" required placeholder="••••••••">
+                    <input type="password" id="p2" required>
                 </div>
                 <button type="submit" class="btn-auth">إنشاء الحساب</button>
             </form>
-            <div class="switch-link">
-                لديك حساب؟ <a href="#" onclick="showSection('login')">تسجيل الدخول</a>
-            </div>
+            <div class="switch-link">لديك حساب بالفعل؟ <a onclick="showSection('login')">تسجيل الدخول</a></div>
         </div>
 
-        <div id="verifyBox" class="hidden">
-            <h2>تأكيد البريد الإلكتروني</h2>
-            <p>تم إرسال رمز التحقق إلى بريدك الإلكتروني</p>
-            <div class="otp-display">4 8 2 1</div>
-            <div class="form-group">
-                <input type="text" maxlength="4" placeholder="أدخل الرمز هنا" style="text-align: center;">
-            </div>
+        <div id="otpForm" class="hidden">
+            <h2>تحقق من البريد</h2>
+            <p>تم إرسال رمز التأكيد إلى بريدك الإلكتروني</p>
+            <div class="otp-code">7 7 4 2</div>
+            <input type="text" maxlength="4" placeholder="- - - -" style="text-align: center; font-size: 1.2rem; width: 50%;">
             <button onclick="showSection('login')" class="btn-auth">تأكيد الرمز</button>
+        </div>
+
+        <div id="loginForm" class="hidden">
+            <h2>تسجيل الدخول</h2>
+            <form onsubmit="doLogin(event)">
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" required>
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" required>
+                </div>
+                <button type="submit" class="btn-auth">دخول</button>
+            </form>
+            <div class="switch-link">ليس لديك حساب؟ <a onclick="showSection('register')">فتح حساب جديد</a></div>
         </div>
     </div>
 
     <div id="identityNotice">
-        <span class="notice-title"><i class="fas fa-shield-check"></i> مطلوب توثيق الحساب</span>
-        <div class="notice-body">
-            لتوثيق الحساب يجب إدخال رقم الهوية/الأقامة وتحميل صورة للهوية (الأمامية والخلفية). 
-            <br><b>سيتم التوثيق عبر منصة نفاذ.</b>
-            الرجاء التأكد من وجود تطبيق نفاذ بجوارك.
+        <span style="color: var(--primary); font-weight: 800; display: block; margin-bottom: 10px;">
+            <i class="fas fa-shield-alt"></i> توثيق الهوية مطلوب
+        </span>
+        <p style="font-size: 0.8rem; color: #555; margin-bottom: 15px;">
+            يجب توثيق الحساب برقم الهوية/الأقامة وتحميل الصور. سيتم الربط عبر <b>منصة نفاذ</b>.
+        </p>
+
+        <div id="noticePhase1">
+            <div class="form-group">
+                <input type="text" id="idNum" placeholder="أدخل رقم الهوية أو الإقامة" maxlength="10">
+            </div>
+            <button class="btn-auth" onclick="showCamera()" style="padding: 10px; font-size: 0.9rem;">ارسال للتوثيق</button>
         </div>
-        <div class="form-group">
-            <input type="text" id="idNumber" placeholder="رقم الهوية / الإقامة (10 أرقام)">
+
+        <div id="noticePhase2" class="hidden">
+            <div class="camera-container">
+                <div class="camera-section" onclick="alert('جاري تشغيل الكاميرا...')">
+                    <i class="fas fa-camera"></i>
+                    <span>الجهة الأمامية</span>
+                </div>
+                <div class="camera-section" onclick="alert('جاري تشغيل الكاميرا...')">
+                    <i class="fas fa-camera"></i>
+                    <span>الجهة الخلفية</span>
+                </div>
+            </div>
+            <button class="btn-auth" onclick="finalRedirect()" style="padding: 10px; font-size: 0.9rem; background: var(--secondary);">تأكيد عبر نفاذ</button>
         </div>
-        <div class="form-group" style="font-size: 0.7rem; color: var(--gray);">
-            <label>صورة الهوية (أمام وخلف)</label>
-            <input type="file" multiple>
-        </div>
-        <button onclick="submitIdentity()" class="btn-auth" style="padding: 10px;">إرسال للتوثيق</button>
     </div>
 
     <script>
         function showSection(id) {
-            document.getElementById('loginBox').classList.add('hidden');
-            document.getElementById('registerBox').classList.add('hidden');
-            document.getElementById('verifyBox').classList.add('hidden');
-            document.getElementById(id + 'Box').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+            document.getElementById('otpForm').classList.add('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+            document.getElementById(id + 'Form').classList.remove('hidden');
         }
 
-        function handleAuth(e, nextStep) {
+        function toOTP(e) {
             e.preventDefault();
-            
-            if(nextStep === 'verify') {
-                const p1 = document.getElementById('regPass').value;
-                const p2 = document.getElementById('regConfirm').value;
-                if(p1 !== p2) { alert("كلمات المرور غير متطابقة"); return; }
-                showSection('verify');
-            } 
-            else if(nextStep === 'login') {
-                // محاكاة تسجيل الدخول والذهاب للصفحة الرئيسية
-                document.getElementById('authCard').innerHTML = `
-                    <i class="fas fa-circle-notch fa-spin" style="font-size: 3rem; color: var(--primary)"></i>
-                    <p style="margin-top:20px">جاري التوجيه إلى المنصة...</p>
-                `;
-                
-                // إظهار الإشعار الثابت
-                document.getElementById('identityNotice').style.display = 'block';
-                
-                // التوجيه لصفحة الـ index بعد ثانيتين
-                setTimeout(() => {
-                    // في الواقع سنستخدم window.location.href = 'index.html'
-                    // لكن هنا سأقوم بمحاكاة التحميل داخل الصفحة لرؤية الإشعار
-                    alert("تم تسجيل الدخول بنجاح. يرجى إكمال التوثيق عبر الإشعار الظاهر أسفل الصفحة.");
-                }, 2000);
+            if(document.getElementById('p1').value !== document.getElementById('p2').value) {
+                alert("كلمات المرور غير متطابقة"); return;
             }
+            showSection('otp');
         }
 
-        function submitIdentity() {
-            const idNum = document.getElementById('idNumber').value;
-            if(idNum.length < 10) {
-                alert("الرجاء إدخال رقم هوية صحيح مكون من 10 أرقام");
-                return;
-            }
+        function doLogin(e) {
+            e.preventDefault();
+            // إخفاء كرت الدخول وإظهار الإشعار في الزاوية
+            document.getElementById('mainCard').style.opacity = "0.3";
+            document.getElementById('mainCard').style.pointerEvents = "none";
+            document.getElementById('identityNotice').style.display = "block";
+        }
+
+        function showCamera() {
+            const val = document.getElementById('idNum').value;
+            if(val.length < 10) { alert("يرجى إدخال رقم الهوية صحيح"); return; }
             
-            alert("تم استلام البيانات، جاري التحقق عبر نفاذ...");
-            // إخفاء الإشعار فقط عند إدخال رقم الهوية بنجاح
-            document.getElementById('identityNotice').style.opacity = '0.5';
-            document.getElementById('identityNotice').innerHTML = `
-                <span class="notice-title">جاري التوثيق...</span>
-                <p style="font-size:0.8rem">الرجاء قبول الطلب من تطبيق نفاذ الآن</p>
-            `;
-            
+            document.getElementById('noticePhase1').classList.add('hidden');
+            document.getElementById('noticePhase2').classList.remove('hidden');
+        }
+
+        function finalRedirect() {
+            alert("يرجى تأكيد الطلب من تطبيق نفاذ على هاتفك الآن...");
             setTimeout(() => {
-                document.getElementById('identityNotice').style.display = 'none';
-                alert("تم توثيق الحساب بنجاح ✅");
-            }, 5000);
+                alert("تم التوثيق بنجاح! جاري الانتقال لصفحة index");
+                window.location.href = "index.html";
+            }, 3000);
         }
     </script>
 </body>
