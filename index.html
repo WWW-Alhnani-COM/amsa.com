@@ -3,238 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الوصول | مجموعة امسا الدولية</title>
+    <title>تسجيل الدخول | مجموعة امسا</title>
     <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@400;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #0C3B2E;
-            --secondary: #D4AF37;
-            --accent: #1E6B52;
-            --light: #F8F9FA;
-            --white: #ffffff;
-        }
-
-        body {
-            font-family: 'Almarai', sans-serif;
-            background-color: var(--light);
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* حاوية النماذج الرئيسية */
-        .auth-card {
-            background: var(--white);
-            width: 100%;
-            max-width: 450px;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            text-align: center;
-            z-index: 10;
-        }
-
-        .logo-img { width: 80px; margin-bottom: 20px; }
-        h2 { color: var(--primary); margin-bottom: 10px; font-weight: 800; }
-        p { color: #666; font-size: 0.9rem; margin-bottom: 25px; }
-
+        :root { --primary: #0C3B2E; --secondary: #D4AF37; }
+        body { font-family: 'Almarai', sans-serif; background: #f8f9fa; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .auth-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
         .form-group { margin-bottom: 15px; text-align: right; }
-        label { display: block; margin-bottom: 8px; font-weight: 700; color: var(--primary); }
-        input {
-            width: 100%; padding: 12px; border: 2px solid #eee;
-            border-radius: 10px; font-family: inherit; box-sizing: border-box;
-            transition: 0.3s;
-        }
-        input:focus { border-color: var(--secondary); outline: none; }
-
-        .btn-auth {
-            width: 100%; padding: 15px;
-            background: linear-gradient(135deg, var(--primary), var(--accent));
-            color: white; border: none; border-radius: 10px;
-            font-weight: 700; cursor: pointer; font-size: 1rem; margin-top: 10px;
-        }
-
-        .switch-link { margin-top: 20px; font-size: 0.9rem; color: #777; }
-        .switch-link a { color: var(--accent); text-decoration: none; font-weight: 700; cursor: pointer; }
-
-        /* إشعار التوثيق في الزاوية اليمنى */
-        #identityNotice {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 350px;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            z-index: 9999;
-            direction: rtl;
-            border-right: 6px solid var(--secondary);
-            padding: 20px;
-            display: none; /* يظهر بعد تسجيل الدخول */
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-
-        /* المربع المقسوم لصور الهوية */
-        .camera-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 15px;
-            border: 1px solid #eee;
-            padding: 5px;
-            border-radius: 12px;
-        }
-        .camera-section {
-            background: #fdfcf7;
-            border: 2px dashed var(--secondary);
-            border-radius: 10px;
-            height: 120px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .camera-section:hover { background: #f7f1e3; }
-        .camera-section i { font-size: 2rem; color: var(--primary); margin-bottom: 8px; }
-        .camera-section span { font-size: 0.75rem; color: #555; font-weight: bold; }
-
-        .hidden { display: none; }
-        .otp-code { font-size: 2rem; letter-spacing: 10px; font-weight: 800; color: var(--secondary); margin: 20px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: 700; color: var(--primary); }
+        input { width: 100%; padding: 12px; border: 2px solid #eee; border-radius: 10px; box-sizing: border-box; }
+        .btn-auth { width: 100%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; }
     </style>
 </head>
 <body>
-
-    <div class="auth-card" id="mainCard">
-        <img src="amsa-logo@4x.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80'">
-        
-        <div id="registerForm">
-            <h2>إنشاء حساب</h2>
-            <form onsubmit="toOTP(event)">
-                <div class="form-group">
-                    <label>الاسم الكامل</label>
-                    <input type="text" placeholder="أدخل اسمك الثلاثي" required>
-                </div>
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" placeholder="example@mail.com" required>
-                </div>
-                <div class="form-group">
-                    <label>كلمة المرور</label>
-                    <input type="password" id="p1" required>
-                </div>
-                <div class="form-group">
-                    <label>تأكيد كلمة المرور</label>
-                    <input type="password" id="p2" required>
-                </div>
-                <button type="submit" class="btn-auth">إنشاء الحساب</button>
-            </form>
-            <div class="switch-link">لديك حساب بالفعل؟ <a onclick="showSection('login')">تسجيل الدخول</a></div>
-        </div>
-
-        <div id="otpForm" class="hidden">
-            <h2>تحقق من البريد</h2>
-            <p>تم إرسال رمز التأكيد إلى بريدك الإلكتروني</p>
-            <div class="otp-code">7 7 4 2</div>
-            <input type="text" maxlength="4" placeholder="- - - -" style="text-align: center; font-size: 1.2rem; width: 50%;">
-            <button onclick="showSection('login')" class="btn-auth">تأكيد الرمز</button>
-        </div>
-
-        <div id="loginForm" class="hidden">
-            <h2>تسجيل الدخول</h2>
-            <form onsubmit="doLogin(event)">
-                <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" required>
-                </div>
-                <div class="form-group">
-                    <label>كلمة المرور</label>
-                    <input type="password" required>
-                </div>
-                <button type="submit" class="btn-auth">دخول</button>
-            </form>
-            <div class="switch-link">ليس لديك حساب؟ <a onclick="showSection('register')">فتح حساب جديد</a></div>
-        </div>
+    <div class="auth-card">
+        <img src="amsa-logo@4x.png" style="width: 80px; margin-bottom: 20px;">
+        <h2>تسجيل الدخول</h2>
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group"><label>البريد الإلكتروني</label><input type="email" required></div>
+            <div class="form-group"><label>كلمة المرور</label><input type="password" required></div>
+            <button type="submit" class="btn-auth">دخول</button>
+        </form>
     </div>
-
-    <div id="identityNotice">
-        <span style="color: var(--primary); font-weight: 800; display: block; margin-bottom: 10px;">
-            <i class="fas fa-shield-alt"></i> توثيق الهوية مطلوب
-        </span>
-        <p style="font-size: 0.8rem; color: #555; margin-bottom: 15px;">
-            يجب توثيق الحساب برقم الهوية/الأقامة وتحميل الصور. سيتم الربط عبر <b>منصة نفاذ</b>.
-        </p>
-
-        <div id="noticePhase1">
-            <div class="form-group">
-                <input type="text" id="idNum" placeholder="أدخل رقم الهوية أو الإقامة" maxlength="10">
-            </div>
-            <button class="btn-auth" onclick="showCamera()" style="padding: 10px; font-size: 0.9rem;">ارسال للتوثيق</button>
-        </div>
-
-        <div id="noticePhase2" class="hidden">
-            <div class="camera-container">
-                <div class="camera-section" onclick="alert('جاري تشغيل الكاميرا...')">
-                    <i class="fas fa-camera"></i>
-                    <span>الجهة الأمامية</span>
-                </div>
-                <div class="camera-section" onclick="alert('جاري تشغيل الكاميرا...')">
-                    <i class="fas fa-camera"></i>
-                    <span>الجهة الخلفية</span>
-                </div>
-            </div>
-            <button class="btn-auth" onclick="finalRedirect()" style="padding: 10px; font-size: 0.9rem; background: var(--secondary);">تأكيد عبر نفاذ</button>
-        </div>
-    </div>
-
     <script>
-        function showSection(id) {
-            document.getElementById('registerForm').classList.add('hidden');
-            document.getElementById('otpForm').classList.add('hidden');
-            document.getElementById('loginForm').classList.add('hidden');
-            document.getElementById(id + 'Form').classList.remove('hidden');
-        }
-
-        function toOTP(e) {
+        function handleLogin(e) {
             e.preventDefault();
-            if(document.getElementById('p1').value !== document.getElementById('p2').value) {
-                alert("كلمات المرور غير متطابقة"); return;
-            }
-            showSection('otp');
-        }
-
-        function doLogin(e) {
-            e.preventDefault();
-            // إخفاء كرت الدخول وإظهار الإشعار في الزاوية
-            document.getElementById('mainCard').style.opacity = "0.3";
-            document.getElementById('mainCard').style.pointerEvents = "none";
-            document.getElementById('identityNotice').style.display = "block";
-        }
-
-        function showCamera() {
-            const val = document.getElementById('idNum').value;
-            if(val.length < 10) { alert("يرجى إدخال رقم الهوية صحيح"); return; }
-            
-            document.getElementById('noticePhase1').classList.add('hidden');
-            document.getElementById('noticePhase2').classList.remove('hidden');
-        }
-
-        function finalRedirect() {
-            alert("يرجى تأكيد الطلب من تطبيق نفاذ على هاتفك الآن...");
-            setTimeout(() => {
-                alert("تم التوثيق بنجاح! جاري الانتقال لصفحة index");
-                window.location.href = "index.html";
-            }, 3000);
+            // تفعيل إشعار التوثيق في الصفحة التالية
+            localStorage.setItem('showIdentityNotice', 'true');
+            window.location.href = "index.html";
         }
     </script>
 </body>
