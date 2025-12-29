@@ -2830,5 +2830,179 @@
         console.log('📱 رقم الواتساب: ' + WhatsAppConfig.companyNumber);
         console.log('🚀 استخدم Ctrl+Shift+T لاختبار الواتساب');
     </script>
+    <style>
+    /* الحاوية الرئيسية للإشعار */
+    #idVerificationNotice {
+        position: fixed;
+        top: 110px; /* تحت الهيدر */
+        right: 20px;
+        width: 380px;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        z-index: 9999;
+        direction: rtl;
+        border-top: 6px solid #D4AF37; /* اللون الذهبي للمجموعة */
+        padding: 25px;
+        display: none; /* يظهر فقط للمسجلين */
+        animation: slideDownFade 0.6s ease-out;
+    }
+
+    @keyframes slideDownFade {
+        from { opacity: 0; transform: translateY(-30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .v-title { color: #0C3B2E; font-weight: 800; font-size: 1.2rem; margin-bottom: 10px; display: block; }
+    .v-text { font-size: 0.9rem; color: #555; line-height: 1.6; margin-bottom: 20px; }
+
+    /* تنسيق إدخال الرقم */
+    .v-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        margin-bottom: 10px;
+        font-family: 'Almarai', sans-serif;
+    }
+
+    /* المربع المقسوم لصور الكاميرا */
+    .camera-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* تقسيم لصفين */
+        gap: 15px;
+        margin-top: 15px;
+        display: none; /* يظهر في المرحلة الثانية */
+    }
+
+    .camera-item {
+        border: 2px dashed #D4AF37;
+        border-radius: 12px;
+        height: 130px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background: #fffdf5;
+        transition: all 0.3s ease;
+    }
+
+    .camera-item:hover {
+        background: #fdf6e3;
+        transform: translateY(-3px);
+    }
+
+    .camera-item i {
+        font-size: 2.2rem;
+        color: #0C3B2E;
+        margin-bottom: 10px;
+    }
+
+    .camera-item span {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: #444;
+    }
+
+    /* الأزرار */
+    .v-btn {
+        width: 100%;
+        background: #0C3B2E;
+        color: white;
+        border: none;
+        padding: 14px;
+        border-radius: 8px;
+        font-weight: 800;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 10px;
+    }
+
+    .v-btn:hover { background: #1E6B52; }
+    .v-btn-gold { background: #D4AF37; color: #0C3B2E; }
+
+    .hidden { display: none; }
+</style>
+
+<div id="idVerificationNotice">
+    <span class="v-title"><i class="fas fa-user-shield"></i> توثيق الهوية مطلوب</span>
+    <p class="v-text">
+        نظراً لأنك مستثمر جديد، يجب توثيق حسابك برقم الهوية/الأقامة عبر <b>منصة نفاذ</b> لتفعيل محفظتك الاستثمارية.
+    </p>
+
+    <div id="step1_input">
+        <input type="text" id="idNumberField" class="v-input" placeholder="أدخل رقم الهوية أو الإقامة (10 أرقام)">
+        <button class="v-btn" onclick="moveToCamera()">إرسال للتوثيق</button>
+    </div>
+
+    <div id="step2_camera" class="hidden">
+        <p class="v-text" style="font-weight:bold; color:#0C3B2E;">يرجى رفع صور الهوية الأصلية:</p>
+        <div class="camera-grid" id="camGrid">
+            <div class="camera-item" onclick="triggerUpload('front')">
+                <i class="fas fa-camera"></i>
+                <span>الجهة الأمامية</span>
+                <input type="file" id="file_front" class="hidden" accept="image/*">
+            </div>
+            <div class="camera-item" onclick="triggerUpload('back')">
+                <i class="fas fa-camera"></i>
+                <span>الجهة الخلفية</span>
+                <input type="file" id="file_back" class="hidden" accept="image/*">
+            </div>
+        </div>
+        <button class="v-btn v-btn-gold" onclick="finalProcess()">تأكيد عبر نفاذ</button>
+    </div>
+</div>
+
+<script>
+    // إظهار الإشعار عند تحميل الصفحة (إذا كان المستخدم مسجلاً حديثاً)
+    window.addEventListener('load', function() {
+        // يمكنك تعديل هذا الشرط ليعمل حسب نظام الجلسات لديك
+        if (localStorage.getItem('needsVerification') === 'true') {
+            document.getElementById('idVerificationNotice').style.display = 'block';
+        }
+    });
+
+    // دالة الانتقال للمرحلة الثانية (الكاميرا)
+    function moveToCamera() {
+        const idVal = document.getElementById('idNumberField').value;
+        if (idVal.length < 10) {
+            alert("يرجى إدخال رقم هوية/إقامة صحيح مكون من 10 أرقام");
+            return;
+        }
+
+        // إخفاء المرحلة الأولى وإظهار الثانية
+        document.getElementById('step1_input').classList.add('hidden');
+        document.getElementById('step2_camera').classList.remove('hidden');
+        document.getElementById('camGrid').style.display = 'grid';
+    }
+
+    // دالة محاكاة رفع الصور
+    function triggerUpload(side) {
+        alert("سيتم الآن فتح الكاميرا لالتقاط " + (side === 'front' ? 'الجهة الأمامية' : 'الجهة الخلفية'));
+        // هنا يمكن ربطها بـ input file الفعلي
+        document.getElementById('file_' + side).click();
+    }
+
+    // دالة الإنهاء والربط بنفاذ
+    function finalProcess() {
+        alert("جاري الربط مع منصة نفاذ... يرجى قبول الطلب من تطبيق نفاذ على جوالك.");
+        
+        // تغيير المحتوى لانتظار نفاذ
+        document.getElementById('idVerificationNotice').innerHTML = `
+            <div style="text-align:center; padding: 20px;">
+                <i class="fas fa-sync fa-spin" style="font-size:2.5rem; color:#D4AF37;"></i>
+                <p style="margin-top:15px; font-weight:bold; color:#0C3B2E;">بانتظار تأكيدك من تطبيق نفاذ...</p>
+            </div>
+        `;
+
+        // إخفاء الإشعار بعد 5 ثوانٍ (محاكاة للنجاح)
+        setTimeout(() => {
+            document.getElementById('idVerificationNotice').style.display = 'none';
+            localStorage.setItem('needsVerification', 'false');
+            alert("✅ تم توثيق هويتك بنجاح. حسابك الآن نشط.");
+        }, 5000);
+    }
+</script>
 </body>
 </html>
