@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول | مجموعة امسا الدولية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0C3B2E;
+            --secondary: #D4AF37;
+            --accent: #1E6B52;
+            --light: #F8F9FA;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Almarai', sans-serif;
+            background-color: var(--light);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .auth-container {
+            background: var(--white);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logo-img {
+            width: 80px;
+            margin-bottom: 20px;
+        }
+
+        h2 { color: var(--primary); margin-bottom: 10px; }
+        p { color: #666; margin-bottom: 30px; font-size: 0.9rem; }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-family: inherit;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+
+        .btn-auth {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .btn-auth:hover { transform: translateY(-2px); opacity: 0.9; }
+
+        .switch-form {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .switch-form a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* تنسيق الـ OTP */
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            direction: ltr;
+            margin: 20px 0;
+        }
+
+        .otp-inputs input {
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hidden { display: none; }
+        
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        <img src="amsa-logo@4x.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/80?text=AMSA'">
+        
+        <div id="loginSection">
+            <h2>تسجيل الدخول</h2>
+            <p>أدخل رقم الجوال المسجل للمتابعة</p>
+            <form id="loginForm" onsubmit="showOTP(event, 'login')">
+                <div class="form-group">
+                    <label>رقم الجوال السعودي</label>
+                    <input type="tel" id="loginPhone" placeholder="05xxxxxxxx" pattern="05[0-9]{8}" required>
+                    <small>يجب أن يبدأ بـ 05 ويتكون من 10 أرقام</small>
+                </div>
+                <button type="submit" class="btn-auth">إرسال كود التحقق</button>
+            </form>
+            <div class="switch-form">
+                ليس لديك حساب؟ <a href="#" onclick="toggleForm('register')">إنشاء حساب جديد</a>
+            </div>
+        </div>
+
+        <div id="registerSection" class="hidden">
+            <h2>إنشاء حساب</h2>
+            <p>انضم إلى مستثمري مجموعة امسا الدولية</p>
+            <form id="registerForm" onsubmit="showOTP(event, 'register')">
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" required placeholder="أدخل اسمك الثلاثي">
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" required placeholder="example@mail.com">
+                </div>
+                <div class="form-group">
+                    <label>رقم الجوال السعودي</label>
+                    <input type="tel" id="regPhone" placeholder="05xxxxxxxx" pattern="05[0-9]{8}" required>
+                </div>
+                <button type="submit" class="btn-auth">إنشاء الحساب</button>
+            </form>
+            <div class="switch-form">
+                لديك حساب بالفعل؟ <a href="#" onclick="toggleForm('login')">تسجيل الدخول</a>
+            </div>
+        </div>
+
+        <div id="otpSection" class="hidden">
+            <h2>رمز التحقق</h2>
+            <p>تم إرسال كود التحقق إلى بريدك/هاتفك</p>
+            <div class="otp-inputs">
+                <input type="text" maxlength="1" oninput="moveNext(this)">
+                <input type="text" maxlength="1" oninput="moveNext(this)">
+                <input type="text" maxlength="1" oninput="moveNext(this)">
+                <input type="text" maxlength="1" oninput="moveNext(this)">
+            </div>
+            <button onclick="verifyAndRedirect()" class="btn-auth">تأكيد ودخول</button>
+            <div class="switch-form">
+                لم يصلك الكود؟ <a href="#">إعادة إرسال</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // التبديل بين النماذج
+        function toggleForm(type) {
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('registerSection').classList.add('hidden');
+            document.getElementById('otpSection').classList.add('hidden');
+            
+            if(type === 'login') document.getElementById('loginSection').classList.remove('hidden');
+            else document.getElementById('registerSection').classList.remove('hidden');
+        }
+
+        // عرض واجهة OTP (عرض فقط كما طلبت)
+        function showOTP(event, type) {
+            event.preventDefault();
+            document.getElementById('loginSection').classList.add('hidden');
+            document.getElementById('registerSection').classList.add('hidden');
+            document.getElementById('otpSection').classList.remove('hidden');
+        }
+
+        // تحريك المؤشر تلقائياً في خانات OTP
+        function moveNext(input) {
+            if (input.value && input.nextElementSibling) {
+                input.nextElementSibling.focus();
+            }
+        }
+
+        // التحقق والتحويل لصفحة index
+        function verifyAndRedirect() {
+            // هنا يتم التحقق من الكود في الحالة الواقعية
+            alert("تم التحقق بنجاح! جاري توجيهك للمنصة...");
+            window.location.href = "index.html"; // تأكد أن اسم ملفك الأصلي هو index.html
+        }
+    </script>
+</body>
+</html>
